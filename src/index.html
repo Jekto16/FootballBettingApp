@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Football Betting App</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <aside class="sidebar">
+
+            <div class="logo">
+                <span>⚽</span>
+                <div>
+                    <strong>Football</strong>
+                    <small>Betting App</small>
+                </div>
+            </div>
+
+            <nav>
+                <button class="nav-item active">
+                    <span>📊</span>
+                    Dashboard
+                </button>
+
+                <button class="nav-item">
+                    <span>🎯</span>
+                    Value Bets
+                </button>
+
+                <button class="nav-item">
+                    <span>💰</span>
+                    Apostas
+                </button>
+
+                <button class="nav-item">
+                    <span>📈</span>
+                    Estatísticas
+                </button>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <button class="nav-item">
+                    <span>⚙️</span>
+                    Definições
+                </button>
+            </div>
+
+        </aside>
+
+
+        <main class="main">
+
+            <header class="topbar">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p>Visão geral da tua banca</p>
+                </div>
+
+                <div class="bankroll-header">
+                    <span>Banca atual</span>
+                    <strong>500,00 €</strong>
+                </div>
+            </header>
+
+
+            <section class="cards">
+
+                <div class="card">
+                    <div class="card-label">Banca atual</div>
+                    <div class="card-value">500,00 €</div>
+                    <div class="card-sub positive">+0,00 €</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">Lucro</div>
+                    <div class="card-value">0,00 €</div>
+                    <div class="card-sub">Desde o início</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">ROI</div>
+                    <div class="card-value">0,00%</div>
+                    <div class="card-sub">Todas as apostas</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">Apostas</div>
+                    <div class="card-value">0</div>
+                    <div class="card-sub">Registadas</div>
+                </div>
+
+            </section>
+
+
+            <section class="content-grid">
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <div>
+                            <h2>Evolução da banca</h2>
+                            <p>Histórico da banca ao longo do tempo</p>
+                        </div>
+
+                        <select>
+                            <option>Últimos 30 dias</option>
+                            <option>Últimos 3 meses</option>
+                            <option>Último ano</option>
+                            <option>Tudo</option>
+                        </select>
+                    </div>
+
+                    <div class="chart-placeholder">
+                        <span>📈</span>
+                        <p>O gráfico da evolução da banca será colocado aqui.</p>
+                    </div>
+                </div>
+
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <div>
+                            <h2>Últimas apostas</h2>
+                            <p>As apostas mais recentes</p>
+                        </div>
+                    </div>
+
+                    <div class="empty-state">
+                        <span>🎯</span>
+                        <strong>Ainda não existem apostas</strong>
+                        <p>As tuas apostas aparecerão aqui.</p>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="js/bankroll.js"></script>
+    <script src="js/valueBet.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+</html>

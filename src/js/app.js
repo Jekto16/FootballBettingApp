@@ -1,0 +1,1 @@
+console.log('Football Betting App iniciada.');
