@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+    setupNavigation();
+    setupBankrollSettings();
     updateDashboard();
+    loadSettings();
 });
 
 function formatMoney(value) {
@@ -12,6 +15,11 @@ function formatMoney(value) {
 function formatPercent(value) {
     return `${value.toFixed(2).replace('.', ',')}%`;
 }
+
+
+/* =========================
+   DASHBOARD
+========================= */
 
 function updateDashboard() {
     const data = Bankroll.get();
@@ -49,20 +57,135 @@ function updateDashboard() {
         betsElement.textContent =
             data.totalBets;
     }
+}
 
-    const wonElement =
-        document.querySelector('[data-won]');
 
-    if (wonElement) {
-        wonElement.textContent =
-            data.wonBets;
+/* =========================
+   NAVEGAÇÃO
+========================= */
+
+function setupNavigation() {
+    const navItems =
+        document.querySelectorAll('.nav-item[data-page]');
+
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+
+            const page =
+                item.dataset.page;
+
+            showPage(page);
+
+            navItems.forEach(navItem => {
+                navItem.classList.remove('active');
+            });
+
+            item.classList.add('active');
+        });
+    });
+}
+
+function showPage(page) {
+
+    const dashboard =
+        document.getElementById('dashboard-page');
+
+    const settings =
+        document.getElementById('settings-page');
+
+    if (dashboard) {
+        dashboard.style.display =
+            page === 'dashboard'
+                ? 'block'
+                : 'none';
     }
 
-    const lostElement =
-        document.querySelector('[data-lost]');
-
-    if (lostElement) {
-        lostElement.textContent =
-            data.lostBets;
+    if (settings) {
+        settings.style.display =
+            page === 'settings'
+                ? 'block'
+                : 'none';
     }
+}
+
+
+/* =========================
+   DEFINIÇÕES DA BANCA
+========================= */
+
+function setupBankrollSettings() {
+
+    const saveButton =
+        document.getElementById('save-bankroll');
+
+    if (!saveButton) {
+        return;
+    }
+
+    saveButton.addEventListener('click', () => {
+
+        const input =
+            document.getElementById('initial-bankroll');
+
+        const message =
+            document.getElementById('settings-message');
+
+        const amount =
+            Number(input.value);
+
+        if (!Number.isFinite(amount) || amount < 0) {
+
+            message.textContent =
+                'Introduz um valor de banca válido.';
+
+            message.className =
+                'settings-message error';
+
+            return;
+        }
+
+        try {
+
+            Bankroll.setInitialBankroll(amount);
+
+            updateDashboard();
+
+            message.textContent =
+                `Banca definida para ${formatMoney(amount)}.`;
+
+            message.className =
+                'settings-message success';
+
+        } catch (error) {
+
+            console.error(error);
+
+            message.textContent =
+                'Ocorreu um erro ao guardar a banca.';
+
+            message.className =
+                'settings-message error';
+        }
+    });
+}
+
+
+/* =========================
+   CARREGAR DEFINIÇÕES
+========================= */
+
+function loadSettings() {
+
+    const input =
+        document.getElementById('initial-bankroll');
+
+    if (!input) {
+        return;
+    }
+
+    const data =
+        Bankroll.get();
+
+    input.value =
+        data.initialBankroll;
 }

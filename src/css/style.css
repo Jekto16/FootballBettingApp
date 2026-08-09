@@ -274,4 +274,101 @@ select {
     .content-grid {
         grid-template-columns: 1fr;
     }
+
+    /* =========================
+   SETTINGS
+========================= */
+
+.settings-panel {
+    max-width: 700px;
+}
+
+.settings-panel h2 {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.settings-description {
+    color: #75808a;
+    font-size: 14px;
+    margin-bottom: 28px;
+}
+
+.settings-field {
+    margin-bottom: 20px;
+}
+
+.settings-field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.input-money {
+    position: relative;
+    max-width: 300px;
+}
+
+.input-money input {
+    width: 100%;
+    padding: 12px 40px 12px 13px;
+    border: 1px solid #d5dce1;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.input-money span {
+    position: absolute;
+    right: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #75808a;
+}
+
+.primary-button {
+    border: 0;
+    background: #263238;
+    color: white;
+    padding: 11px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.primary-button:hover {
+    opacity: 0.9;
+}
+
+.settings-message {
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+.settings-message.success {
+    color: #238636;
+}
+
+.settings-message.error {
+    color: #c62828;
+}
+
+.danger-zone {
+    margin-top: 35px;
+    padding: 16px;
+    border: 1px solid #efd0d0;
+    background: #fff6f6;
+    border-radius: 9px;
+}
+
+.danger-zone h3 {
+    margin: 0 0 7px;
+    font-size: 14px;
+}
+
+.danger-zone p {
+    margin: 0;
+    color: #7b6262;
+    font-size: 13px;
+}
 }
