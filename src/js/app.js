@@ -20,70 +20,239 @@ function updateDashboard() {
 
     const bankrollData = Bankroll.get();
 
-    const bets = typeof Bets !== 'undefined'
-        ? Bets.getAll()
-        : [];
+    const bets =
+        typeof Bets !== 'undefined'
+            ? Bets.getAll()
+            : [];
 
-    const totalProfit = bets.reduce((total, bet) => {
 
-        if (
-            bet.status === 'won' ||
-            bet.status === 'lost'
-        ) {
-            return total + Number(bet.profit || 0);
-        }
+    /* =========================
+       LUCRO REALIZADO
+    ========================== */
 
-        return total;
+    const totalProfit = bets.reduce(
+        (total, bet) => {
 
-    }, 0);
+            if (
+                bet.status === 'won' ||
+                bet.status === 'lost'
+            ) {
+                return total + Number(bet.profit || 0);
+            }
 
-    const totalStake = bets.reduce((total, bet) => {
+            return total;
 
-        if (
-            bet.status === 'won' ||
-            bet.status === 'lost'
-        ) {
-            return total + Number(bet.stake || 0);
-        }
+        },
+        0
+    );
 
-        return total;
 
-    }, 0);
+    /* =========================
+       STAKE RESOLVIDA
+    ========================== */
 
-    const roi = totalStake > 0
-        ? (totalProfit / totalStake) * 100
-        : 0;
+    const totalStake = bets.reduce(
+        (total, bet) => {
+
+            if (
+                bet.status === 'won' ||
+                bet.status === 'lost'
+            ) {
+                return total + Number(bet.stake || 0);
+            }
+
+            return total;
+
+        },
+        0
+    );
+
+
+    /* =========================
+       STAKE PENDENTE
+    ========================== */
+
+    const pendingStake = bets.reduce(
+        (total, bet) => {
+
+            if (bet.status === 'pending') {
+                return total + Number(bet.stake || 0);
+            }
+
+            return total;
+
+        },
+        0
+    );
+
+
+    /* =========================
+       ROI
+    ========================== */
+
+    const roi =
+        totalStake > 0
+            ? (totalProfit / totalStake) * 100
+            : 0;
+
+
+    /* =========================
+       BANCA TOTAL
+    ========================== */
 
     const currentBankroll =
-        Number(bankrollData.initialBankroll) + totalProfit;
+        Number(bankrollData.initialBankroll) +
+        totalProfit;
+
+
+    /* =========================
+       BANCA DISPONÍVEL
+    ========================== */
+
+    const availableBankroll =
+        currentBankroll -
+        pendingStake;
+
+
+    /* =========================
+       EXPOSIÇÃO
+    ========================== */
+
+    const exposure =
+        currentBankroll > 0
+            ? (pendingStake / currentBankroll) * 100
+            : 0;
+
+
+    /* =========================
+       BANCA TOTAL
+    ========================== */
 
     const bankrollElements =
-        document.querySelectorAll('[data-bankroll]');
+        document.querySelectorAll(
+            '[data-bankroll]'
+        );
+
 
     bankrollElements.forEach(element => {
-        element.textContent = formatMoney(currentBankroll);
+
+        element.textContent =
+            formatMoney(currentBankroll);
+
     });
 
+
+    /* =========================
+       BANCA DISPONÍVEL
+    ========================== */
+
+    const availableElement =
+        document.querySelector(
+            '[data-available-bankroll]'
+        );
+
+
+    if (availableElement) {
+
+        availableElement.textContent =
+            formatMoney(availableBankroll);
+
+    }
+
+
+    /* =========================
+       EM APOSTAS
+    ========================== */
+
+    const pendingStakeElement =
+        document.querySelector(
+            '[data-pending-stake]'
+        );
+
+
+    if (pendingStakeElement) {
+
+        pendingStakeElement.textContent =
+            formatMoney(pendingStake);
+
+    }
+
+
+    /* =========================
+       EXPOSIÇÃO
+    ========================== */
+
+    const exposureElement =
+        document.querySelector(
+            '[data-exposure]'
+        );
+
+
+    if (exposureElement) {
+
+        exposureElement.textContent =
+            formatPercent(exposure);
+
+    }
+
+
+    /* =========================
+       LUCRO
+    ========================== */
+
     const profitElement =
-        document.querySelector('[data-profit]');
+        document.querySelector(
+            '[data-profit]'
+        );
+
 
     if (profitElement) {
-        profitElement.textContent = formatMoney(totalProfit);
+
+        profitElement.textContent =
+            formatMoney(totalProfit);
+
     }
+
+
+    /* =========================
+       ROI
+    ========================== */
 
     const roiElement =
-        document.querySelector('[data-roi]');
+        document.querySelector(
+            '[data-roi]'
+        );
+
 
     if (roiElement) {
-        roiElement.textContent = formatPercent(roi);
+
+        roiElement.textContent =
+            formatPercent(roi);
+
     }
+
+
+    /* =========================
+       NÚMERO DE APOSTAS
+    ========================== */
 
     const betsElement =
-        document.querySelector('[data-bets]');
+        document.querySelector(
+            '[data-bets]'
+        );
+
 
     if (betsElement) {
-        betsElement.textContent = bets.length;
+
+        betsElement.textContent =
+            bets.length;
+
     }
+
+
+    /* =========================
+       ÚLTIMAS APOSTAS
+    ========================== */
 
     renderDashboardBets(bets);
 }
