@@ -1,196 +1,734 @@
 <!DOCTYPE html>
+
 <html lang="pt-PT">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Football Betting App</title>
+```
+<title>Football Betting App</title>
 
-    <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css">
+```
+
 </head>
 
 <body>
 
-    <div class="app">
+```
+<div class="app">
 
-        <aside class="sidebar">
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
 
-            <div class="logo">
-                <span>⚽</span>
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span>⚽</span>
+
+            <div>
+                <strong>Football</strong>
+                <small>Betting App</small>
+            </div>
+        </div>
+
+
+        <nav>
+
+            <button
+                class="nav-item active"
+                data-page="dashboard"
+            >
+                <span>📊</span>
+                Dashboard
+            </button>
+
+
+            <button
+                class="nav-item"
+                data-page="value-bets"
+            >
+                <span>🎯</span>
+                Value Bets
+            </button>
+
+
+            <button
+                class="nav-item"
+                data-page="bets"
+            >
+                <span>💰</span>
+                Apostas
+            </button>
+
+
+            <button
+                class="nav-item"
+                data-page="statistics"
+            >
+                <span>📈</span>
+                Estatísticas
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button
+                class="nav-item"
+                data-page="settings"
+            >
+                <span>⚙️</span>
+                Definições
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="main">
+
+
+        <!-- =========================
+             DASHBOARD
+        ========================== -->
+
+        <section
+            class="page"
+            id="dashboard-page"
+        >
+
+            <header class="topbar">
 
                 <div>
-                    <strong>Football</strong>
-                    <small>Betting App</small>
+                    <h1>Dashboard</h1>
+
+                    <p>
+                        Visão geral da tua banca
+                    </p>
                 </div>
-            </div>
 
 
-            <nav>
+                <div class="bankroll-header">
 
-                <button class="nav-item active" data-page="dashboard">
-                    <span>📊</span>
-                    Dashboard
+                    <span>
+                        Banca atual
+                    </span>
+
+                    <strong data-bankroll>
+                        500,00 €
+                    </strong>
+
+                </div>
+
+            </header>
+
+
+            <!-- CARDS -->
+
+            <section class="cards">
+
+
+                <div class="card">
+
+                    <div class="card-label">
+                        Banca atual
+                    </div>
+
+                    <div
+                        class="card-value"
+                        data-bankroll
+                    >
+                        500,00 €
+                    </div>
+
+                    <div class="card-sub positive">
+                        +0,00 €
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-label">
+                        Lucro
+                    </div>
+
+                    <div
+                        class="card-value"
+                        data-profit
+                    >
+                        0,00 €
+                    </div>
+
+                    <div class="card-sub">
+                        Desde o início
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-label">
+                        ROI
+                    </div>
+
+                    <div
+                        class="card-value"
+                        data-roi
+                    >
+                        0,00%
+                    </div>
+
+                    <div class="card-sub">
+                        Todas as apostas
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-label">
+                        Apostas
+                    </div>
+
+                    <div
+                        class="card-value"
+                        data-bets
+                    >
+                        0
+                    </div>
+
+                    <div class="card-sub">
+                        Registadas
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- DASHBOARD CONTENT -->
+
+            <section class="content-grid">
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Evolução da banca
+                            </h2>
+
+                            <p>
+                                Histórico da banca ao longo do tempo
+                            </p>
+
+                        </div>
+
+
+                        <select>
+
+                            <option>
+                                Últimos 30 dias
+                            </option>
+
+                            <option>
+                                Últimos 3 meses
+                            </option>
+
+                            <option>
+                                Último ano
+                            </option>
+
+                            <option>
+                                Tudo
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="chart-placeholder">
+
+                        <span>
+                            📈
+                        </span>
+
+                        <p>
+                            O gráfico da evolução da banca será colocado aqui.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Últimas apostas
+                            </h2>
+
+                            <p>
+                                As apostas mais recentes
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="empty-state">
+
+                        <span>
+                            🎯
+                        </span>
+
+                        <strong>
+                            Ainda não existem apostas
+                        </strong>
+
+                        <p>
+                            As tuas apostas aparecerão aqui.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+        </section>
+
+
+        <!-- =========================
+             APOSTAS
+        ========================== -->
+
+        <section
+            class="page"
+            id="bets-page"
+            style="display: none;"
+        >
+
+            <header class="topbar">
+
+                <div>
+
+                    <h1>
+                        Apostas
+                    </h1>
+
+                    <p>
+                        Registo e gestão das tuas apostas
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="new-bet-button"
+                    class="primary-button"
+                >
+                    + Nova aposta
                 </button>
 
-                <button class="nav-item" data-page="value-bets">
-                    <span>🎯</span>
-                    Value Bets
-                </button>
-
-                <button class="nav-item" data-page="bets">
-                    <span>💰</span>
-                    Apostas
-                </button>
-
-                <button class="nav-item" data-page="statistics">
-                    <span>📈</span>
-                    Estatísticas
-                </button>
-
-            </nav>
+            </header>
 
 
-            <div class="sidebar-bottom">
+            <div class="panel">
 
-                <button class="nav-item" data-page="settings">
-                    <span>⚙️</span>
-                    Definições
-                </button>
-
-            </div>
-
-        </aside>
-
-
-        <main class="main">
-
-
-            <!-- =========================
-                 DASHBOARD
-            ========================== -->
-
-            <section class="page" id="dashboard-page">
-
-                <header class="topbar">
+                <div class="panel-header">
 
                     <div>
-                        <h1>Dashboard</h1>
-                        <p>Visão geral da tua banca</p>
-                    </div>
 
-                    <div class="bankroll-header">
-                        <span>Banca atual</span>
-                        <strong data-bankroll>500,00 €</strong>
-                    </div>
+                        <h2>
+                            Histórico de apostas
+                        </h2>
 
-                </header>
-
-
-                <section class="cards">
-
-                    <div class="card">
-
-                        <div class="card-label">
-                            Banca atual
-                        </div>
-
-                        <div class="card-value" data-bankroll>
-                            500,00 €
-                        </div>
-
-                        <div class="card-sub positive">
-                            +0,00 €
-                        </div>
+                        <p>
+                            Todas as apostas registadas
+                        </p>
 
                     </div>
 
+                </div>
 
-                    <div class="card">
 
-                        <div class="card-label">
-                            Lucro
-                        </div>
+                <div class="bets-table-wrapper">
 
-                        <div class="card-value" data-profit>
-                            0,00 €
-                        </div>
+                    <table class="bets-table">
 
-                        <div class="card-sub">
-                            Desde o início
-                        </div>
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Data
+                                </th>
+
+                                <th>
+                                    Jogo
+                                </th>
+
+                                <th>
+                                    Mercado
+                                </th>
+
+                                <th>
+                                    Seleção
+                                </th>
+
+                                <th>
+                                    Odd
+                                </th>
+
+                                <th>
+                                    Stake
+                                </th>
+
+                                <th>
+                                    Estado
+                                </th>
+
+                                <th>
+                                    Lucro
+                                </th>
+
+                                <th>
+                                    Ações
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="bets-table-body">
+
+                        </tbody>
+
+                    </table>
+
+
+                    <div
+                        id="bets-empty-state"
+                        class="empty-state"
+                    >
+
+                        <span>
+                            💰
+                        </span>
+
+                        <strong>
+                            Ainda não existem apostas
+                        </strong>
+
+                        <p>
+                            Clica em "+ Nova aposta" para
+                            registar a primeira.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             DEFINIÇÕES
+        ========================== -->
+
+        <section
+            class="page"
+            id="settings-page"
+            style="display: none;"
+        >
+
+            <header class="topbar">
+
+                <div>
+
+                    <h1>
+                        Definições
+                    </h1>
+
+                    <p>
+                        Configuração da aplicação
+                    </p>
+
+                </div>
+
+            </header>
+
+
+            <div class="panel settings-panel">
+
+                <h2>
+                    💰 Gestão de Banca
+                </h2>
+
+
+                <p class="settings-description">
+
+                    Define a banca inicial utilizada pela aplicação.
+
+                </p>
+
+
+                <div class="settings-field">
+
+                    <label for="initial-bankroll">
+
+                        Banca inicial
+
+                    </label>
+
+
+                    <div class="input-money">
+
+                        <input
+                            id="initial-bankroll"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            value="500"
+                        >
+
+                        <span>
+                            €
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="save-bankroll"
+                    class="primary-button"
+                >
+
+                    Guardar banca
+
+                </button>
+
+
+                <div
+                    id="settings-message"
+                    class="settings-message"
+                ></div>
+
+
+                <div class="danger-zone">
+
+                    <h3>
+                        ⚠️ Atenção
+                    </h3>
+
+
+                    <p>
+
+                        Alterar a banca inicial irá reiniciar
+                        as estatísticas e o histórico da banca.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             MODAL — NOVA APOSTA
+        ========================== -->
+
+        <div
+            id="bet-modal"
+            class="modal"
+            style="display: none;"
+        >
+
+            <div class="modal-content">
+
+
+                <div class="modal-header">
+
+                    <div>
+
+                        <h2>
+                            Nova aposta
+                        </h2>
+
+                        <p>
+                            Regista uma nova aposta
+                        </p>
 
                     </div>
 
 
-                    <div class="card">
+                    <button
+                        id="close-bet-modal"
+                        class="modal-close"
+                    >
+                        ×
+                    </button>
 
-                        <div class="card-label">
-                            ROI
+                </div>
+
+
+                <form id="bet-form">
+
+
+                    <!-- DATA / COMPETIÇÃO -->
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label for="bet-date">
+                                Data
+                            </label>
+
+                            <input
+                                id="bet-date"
+                                type="date"
+                                required
+                            >
+
                         </div>
 
-                        <div class="card-value" data-roi>
-                            0,00%
+
+                        <div class="form-group">
+
+                            <label for="bet-competition">
+                                Competição
+                            </label>
+
+                            <input
+                                id="bet-competition"
+                                type="text"
+                                placeholder="Ex: Liga Portugal"
+                                required
+                            >
+
                         </div>
 
-                        <div class="card-sub">
-                            Todas as apostas
-                        </div>
 
                     </div>
 
 
-                    <div class="card">
+                    <!-- EQUIPAS -->
 
-                        <div class="card-label">
-                            Apostas
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label for="bet-home-team">
+                                Equipa da casa
+                            </label>
+
+                            <input
+                                id="bet-home-team"
+                                type="text"
+                                placeholder="Ex: Benfica"
+                                required
+                            >
+
                         </div>
 
-                        <div class="card-value" data-bets>
-                            0
+
+                        <div class="form-group">
+
+                            <label for="bet-away-team">
+                                Equipa visitante
+                            </label>
+
+                            <input
+                                id="bet-away-team"
+                                type="text"
+                                placeholder="Ex: Porto"
+                                required
+                            >
+
                         </div>
 
-                        <div class="card-sub">
-                            Registadas
-                        </div>
 
                     </div>
 
-                </section>
+
+                    <!-- MERCADO / SELEÇÃO -->
+
+                    <div class="form-row">
 
 
-                <section class="content-grid">
+                        <div class="form-group">
+
+                            <label for="bet-market">
+                                Mercado
+                            </label>
 
 
-                    <div class="panel">
+                            <select
+                                id="bet-market"
+                                required
+                            >
 
-                        <div class="panel-header">
-
-                            <div>
-                                <h2>Evolução da banca</h2>
-
-                                <p>
-                                    Histórico da banca ao longo do tempo
-                                </p>
-                            </div>
-
-
-                            <select>
-
-                                <option>
-                                    Últimos 30 dias
+                                <option value="">
+                                    Selecionar mercado
                                 </option>
 
-                                <option>
-                                    Últimos 3 meses
+                                <option value="1X2">
+                                    1X2
                                 </option>
 
-                                <option>
-                                    Último ano
+                                <option value="Dupla Chance">
+                                    Dupla Chance
                                 </option>
 
-                                <option>
-                                    Tudo
+                                <option value="Over/Under">
+                                    Over / Under
+                                </option>
+
+                                <option value="Ambas Marcam">
+                                    Ambas Marcam
+                                </option>
+
+                                <option value="Handicap">
+                                    Handicap
+                                </option>
+
+                                <option value="Outro">
+                                    Outro
                                 </option>
 
                             </select>
@@ -198,164 +736,122 @@
                         </div>
 
 
-                        <div class="chart-placeholder">
+                        <div class="form-group">
 
-                            <span>📈</span>
-
-                            <p>
-                                O gráfico da evolução da banca será colocado aqui.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="panel">
-
-                        <div class="panel-header">
-
-                            <div>
-                                <h2>Últimas apostas</h2>
-
-                                <p>
-                                    As apostas mais recentes
-                                </p>
-                            </div>
-
-                        </div>
-
-
-                        <div class="empty-state">
-
-                            <span>🎯</span>
-
-                            <strong>
-                                Ainda não existem apostas
-                            </strong>
-
-                            <p>
-                                As tuas apostas aparecerão aqui.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                </section>
-
-            </section>
-
-
-            <!-- =========================
-                 DEFINIÇÕES
-            ========================== -->
-
-            <section
-                class="page"
-                id="settings-page"
-                style="display: none;"
-            >
-
-                <header class="topbar">
-
-                    <div>
-
-                        <h1>Definições</h1>
-
-                        <p>
-                            Configuração da aplicação
-                        </p>
-
-                    </div>
-
-                </header>
-
-
-                <div class="panel settings-panel">
-
-                    <h2>
-                        💰 Gestão de Banca
-                    </h2>
-
-
-                    <p class="settings-description">
-
-                        Define a banca inicial utilizada pela aplicação.
-
-                    </p>
-
-
-                    <div class="settings-field">
-
-                        <label for="initial-bankroll">
-                            Banca inicial
-                        </label>
-
-
-                        <div class="input-money">
+                            <label for="bet-selection">
+                                Seleção
+                            </label>
 
                             <input
-                                id="initial-bankroll"
-                                type="number"
-                                min="0"
-                                step="0.01"
-                                value="500"
+                                id="bet-selection"
+                                type="text"
+                                placeholder="Ex: Benfica"
+                                required
                             >
-
-                            <span>€</span>
 
                         </div>
 
-                    </div>
-
-
-                    <button
-                        id="save-bankroll"
-                        class="primary-button"
-                    >
-                        Guardar banca
-                    </button>
-
-
-                    <div
-                        id="settings-message"
-                        class="settings-message"
-                    ></div>
-
-
-                    <div class="danger-zone">
-
-                        <h3>
-                            ⚠️ Atenção
-                        </h3>
-
-
-                        <p>
-
-                            Alterar a banca inicial irá reiniciar
-                            as estatísticas e o histórico da banca.
-
-                        </p>
 
                     </div>
 
-                </div>
 
-            </section>
+                    <!-- ODD / STAKE -->
 
-
-        </main>
-
-    </div>
+                    <div class="form-row">
 
 
-    <script src="js/bankroll.js"></script>
+                        <div class="form-group">
 
-    <script src="js/valueBet.js"></script>
+                            <label for="bet-odds">
+                                Odd
+                            </label>
 
-    <script src="js/app.js"></script>
+                            <input
+                                id="bet-odds"
+                                type="number"
+                                min="1.01"
+                                step="0.01"
+                                placeholder="2.10"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="bet-stake">
+                                Stake
+                            </label>
+
+                            <input
+                                id="bet-stake"
+                                type="number"
+                                min="0.01"
+                                step="0.01"
+                                placeholder="10.00"
+                                required
+                            >
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- BOTÕES -->
+
+                    <div class="modal-actions">
+
+
+                        <button
+                            type="button"
+                            id="cancel-bet"
+                            class="secondary-button"
+                        >
+
+                            Cancelar
+
+                        </button>
+
+
+                        <button
+                            type="submit"
+                            class="primary-button"
+                        >
+
+                            Guardar aposta
+
+                        </button>
+
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+</div>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================== -->
+
+<script src="js/bankroll.js"></script>
+
+<script src="js/bets.js"></script>
+
+<script src="js/valueBet.js"></script>
+
+<script src="js/app.js"></script>
+```
 
 </body>
 

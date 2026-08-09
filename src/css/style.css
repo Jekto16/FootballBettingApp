@@ -371,4 +371,236 @@ select {
     color: #7b6262;
     font-size: 13px;
 }
+
+/* =========================
+   BETS
+========================= */
+
+.bets-table-wrapper {
+    overflow-x: auto;
+}
+
+.bets-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.bets-table th {
+    text-align: left;
+    padding: 12px 10px;
+    color: #75808a;
+    font-size: 11px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #e1e6ea;
+    white-space: nowrap;
+}
+
+.bets-table td {
+    padding: 14px 10px;
+    border-bottom: 1px solid #edf0f2;
+    white-space: nowrap;
+}
+
+.bets-table tbody tr:hover {
+    background: #f8fafb;
+}
+
+.match-separator {
+    color: #9aa3aa;
+    margin: 0 5px;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.status.pending {
+    background: #fff4d6;
+    color: #8a6500;
+}
+
+.secondary-button {
+    border: 1px solid #d5dce1;
+    background: white;
+    color: #3d4851;
+    padding: 11px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.secondary-button:hover {
+    background: #f4f6f8;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: white;
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.modal-header h2 {
+    margin: 0 0 5px;
+}
+
+.modal-header p {
+    margin: 0;
+    color: #75808a;
+    font-size: 13px;
+}
+
+.modal-close {
+    border: 0;
+    background: transparent;
+    font-size: 28px;
+    color: #75808a;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #d5dce1;
+    border-radius: 8px;
+    background: white;
+    font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #687782;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+@media (max-width: 700px) {
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* =========================
+DASHBOARD — ÚLTIMAS APOSTAS
+========================= */
+
+.dashboard-bets-list {
+display: flex;
+flex-direction: column;
+margin-top: 10px;
+}
+
+.dashboard-bet-item {
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 15px;
+padding: 14px 0;
+border-bottom: 1px solid #edf0f2;
+}
+
+.dashboard-bet-item:last-child {
+border-bottom: none;
+}
+
+.dashboard-bet-main {
+display: flex;
+flex-direction: column;
+gap: 5px;
+min-width: 0;
+}
+
+.dashboard-bet-main strong {
+font-size: 13px;
+}
+
+.dashboard-bet-main strong span {
+color: #9aa3aa;
+font-weight: 400;
+margin: 0 4px;
+}
+
+.dashboard-bet-main small {
+color: #75808a;
+font-size: 11px;
+}
+
+.dashboard-bet-right {
+display: flex;
+align-items: center;
+gap: 12px;
+flex-shrink: 0;
+}
+
+.dashboard-bet-right > strong {
+font-size: 13px;
+}
+
+.status.won {
+background: #e6f6eb;
+color: #238636;
+}
+
+.status.lost {
+background: #fde8e8;
+color: #c62828;
+}
+
+
 }
