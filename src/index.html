@@ -12,6 +12,17 @@
 <link rel="stylesheet" href="css/style.css">
 ```
 
+
+<style>
+.selection-help {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.35;
+}
+</style>
+
 </head>
 
 <body>
@@ -293,21 +304,21 @@
                         </div>
 
 
-                        <select>
+                        <select id="bankroll-chart-period">
 
-                            <option>
+                            <option value="30">
                                 Últimos 30 dias
                             </option>
 
-                            <option>
+                            <option value="90">
                                 Últimos 3 meses
                             </option>
 
-                            <option>
+                            <option value="365">
                                 Último ano
                             </option>
 
-                            <option>
+                            <option value="all">
                                 Tudo
                             </option>
 
@@ -316,17 +327,23 @@
                     </div>
 
 
-                    <div class="chart-placeholder">
+                    <div class="chart-container">
 
-                        <span>
-                            📈
-                        </span>
+                        <canvas id="bankroll-chart"></canvas>
+
+                    <div
+                        id="bankroll-chart-empty"
+                        class="chart-empty"
+                    >
+                        <span>📈</span>
 
                         <p>
-                            O gráfico da evolução da banca será colocado aqui.
+                            Ainda não existem dados suficientes
+                            para apresentar a evolução da banca.
                         </p>
-
                     </div>
+
+                </div>
 
                 </div>
 
@@ -370,6 +387,399 @@
 
 
             </section>
+
+        </section>
+
+                <!-- =========================
+             VALUE BETS
+        ========================== -->
+
+        <section
+            class="page"
+            id="value-bets-page"
+            style="display: none;"
+        >
+
+            <header class="topbar">
+
+                <div>
+
+                    <h1>
+                        Value Bets
+                    </h1>
+
+                    <p>
+                        Encontra apostas com valor esperado positivo
+                    </p>
+
+                </div>
+
+            </header>
+
+
+            <!-- RESUMO -->
+
+            <section class="cards">
+
+                <div class="card">
+
+                    <div class="card-label">
+                        Oportunidades
+                    </div>
+
+                    <div
+                        class="card-value"
+                        data-value-bets-count
+                    >
+                        0
+                    </div>
+
+                    <div class="card-sub">
+                        Value Bets encontradas
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-label">
+                        Melhor Value Bet
+                    </div>
+
+                    <div
+                        class="card-value"
+                        data-best-value-edge
+                    >
+                        0,00%
+                    </div>
+
+                    <div class="card-sub">
+                        Maior edge
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-label">
+                        EV médio
+                    </div>
+
+                    <div
+                        class="card-value"
+                        data-average-value-ev
+                    >
+                        0,00%
+                    </div>
+
+                    <div class="card-sub">
+                        Valor esperado
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-label">
+                        Stake recomendada
+                    </div>
+
+                    <div
+                        class="card-value"
+                        data-value-recommended-stake
+                    >
+                        0,00 €
+                    </div>
+
+                    <div class="card-sub">
+                        Próxima aposta
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 ANALISAR VALUE BET
+            ========================== -->
+
+            <div class="panel value-bet-analyzer">
+
+                <div class="panel-header">
+                    <div>
+                        <h2>🎯 Analisar Value Bet</h2>
+                        <p>O modelo estatístico calcula a probabilidade com base nos resultados históricos da competição e verifica se existe valor.</p>
+                    </div>
+                </div>
+
+                <form id="value-bet-form">
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label for="value-competition">Competição</label>
+                            <select id="value-competition" required>
+                                <option value="">Selecionar competição</option>
+                                <option value="PL">Premier League</option>
+                                <option value="PD">La Liga</option>
+                                <option value="BL1">Bundesliga</option>
+                                <option value="SA">Serie A</option>
+                                <option value="FL1">Ligue 1</option>
+                                <option value="PPL">Liga Portugal</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label for="value-home-team">Equipa da casa</label>
+                            <select id="value-home-team" required disabled>
+                                <option value="">Selecionar equipa da casa</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="value-away-team">Equipa visitante</label>
+                            <select id="value-away-team" required disabled>
+                                <option value="">Selecionar equipa visitante</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label for="value-market">Mercado</label>
+                            <select id="value-market" required>
+                                <option value="">Selecionar mercado</option>
+                                <option value="1X2">1X2</option>
+                                <option value="Dupla Chance">Dupla Chance</option>
+                                <option value="Over/Under">Over / Under</option>
+                                <option value="Ambas Marcam">Ambas Marcam</option>
+                                <option value="Handicap">Handicap</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="value-selection">Seleção</label>
+                            <select id="value-selection" required disabled>
+                                <option value="">Selecionar seleção</option>
+                            </select>
+
+                            <small
+                                id="value-selection-help"
+                                class="selection-help"
+                            ></small>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label for="value-odds">Odd</label>
+                            <input id="value-odds" type="number" min="1.01" step="0.01" placeholder="2.10" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="value-probability">Probabilidade do modelo</label>
+                            <div class="input-money">
+                                <input id="value-probability" type="number" min="0.01" max="99.99" step="0.01" placeholder="Calculada automaticamente" readonly required>
+                                <span>%</span>
+                            </div>
+                            <div id="value-model-status" class="stake-info">
+                                Seleciona a competição, as equipas e a seleção.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="value-stake">Stake</label>
+                            <input id="value-stake" type="number" min="0" step="0.01" placeholder="10.00">
+                        </div>
+
+                    </div>
+
+                    <div id="value-bet-analysis-result" style="display:none;">
+
+                        <div class="cards">
+
+                            <div class="card">
+                                <div class="card-label">Odd justa</div>
+                                <div class="card-value" data-analysis-fair-odds>0,00</div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-label">Prob. implícita</div>
+                                <div class="card-value" data-analysis-implied>0,00%</div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-label">Edge</div>
+                                <div class="card-value" data-analysis-edge>0,00%</div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-label">EV</div>
+                                <div class="card-value" data-analysis-ev>0,00%</div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-label">xG Casa</div>
+                                <div class="card-value" data-analysis-xg-home>0,00</div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-label">xG Fora</div>
+                                <div class="card-value" data-analysis-xg-away>0,00</div>
+                            </div>
+
+                        </div>
+
+                        <div id="value-bet-analysis-status" class="settings-message"></div>
+
+                        <div class="modal-actions">
+
+                            <button type="button" id="save-value-bet" class="primary-button" disabled>
+                                Guardar Value Bet
+                            </button>
+
+                            <button type="button" id="clear-value-bet" class="secondary-button">
+                                Limpar
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" id="calculate-model-probability" class="secondary-button">
+                            Calcular probabilidade
+                        </button>
+
+                        <button type="submit" class="primary-button">
+                            Analisar Value Bet
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+
+            <!-- VALUE BETS -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Oportunidades de Value Bet
+                        </h2>
+
+                        <p>
+                            Apostas onde a probabilidade estimada é superior à probabilidade implícita da odd
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="bets-table-wrapper">
+
+                    <table class="bets-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Jogo
+                                </th>
+
+                                <th>
+                                    Mercado
+                                </th>
+
+                                <th>
+                                    Seleção
+                                </th>
+
+                                <th>
+                                    Odd
+                                </th>
+
+                                <th>
+                                    Probabilidade
+                                </th>
+
+                                <th>
+                                    Prob. implícita
+                                </th>
+
+                                <th>
+                                    Edge
+                                </th>
+
+                                <th>
+                                    EV
+                                </th>
+
+                                <th>
+                                    Stake
+                                </th>
+
+                                <th>
+                                    Estado
+                                </th>
+
+<th>
+                                    Ação
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody
+                            id="value-bets-table-body"
+                        >
+                        </tbody>
+
+                    </table>
+
+
+                    <div
+                        id="value-bets-empty-state"
+                        class="empty-state"
+                    >
+
+                        <span>
+                            🎯
+                        </span>
+
+                        <strong>
+                            Ainda não existem Value Bets
+                        </strong>
+
+                        <p>
+                            Introduz uma probabilidade estimada superior à probabilidade implícita da odd para encontrar valor.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </section>
 
@@ -510,6 +920,486 @@
 
         </section>
 
+        <!-- =========================
+     ESTATÍSTICAS
+========================== -->
+
+<section
+    class="page"
+    id="statistics-page"
+    style="display: none;"
+>
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>
+                Estatísticas
+            </h1>
+
+            <p>
+                Análise detalhada do teu desempenho
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <!-- RESUMO -->
+
+    <section class="cards statistics-cards">
+
+        <div class="card">
+
+            <div class="card-label">
+                Total de apostas
+            </div>
+
+            <div
+                class="card-value"
+                data-stat-total
+            >
+                0
+            </div>
+
+            <div class="card-sub">
+                Todas as apostas
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-label">
+                Apostas ganhas
+            </div>
+
+            <div
+                class="card-value"
+                data-stat-won
+            >
+                0
+            </div>
+
+            <div class="card-sub">
+                Resolvidas
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-label">
+                Apostas perdidas
+            </div>
+
+            <div
+                class="card-value"
+                data-stat-lost
+            >
+                0
+            </div>
+
+            <div class="card-sub">
+                Resolvidas
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-label">
+                Taxa de acerto
+            </div>
+
+            <div
+                class="card-value"
+                data-stat-hit-rate
+            >
+                0,00%
+            </div>
+
+            <div class="card-sub">
+                Ganha / resolvidas
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-label">
+                Lucro
+            </div>
+
+            <div
+                class="card-value"
+                data-stat-profit
+            >
+                0,00 €
+            </div>
+
+            <div class="card-sub">
+                Apostas resolvidas
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-label">
+                ROI
+            </div>
+
+            <div
+                class="card-value"
+                data-stat-roi
+            >
+                0,00%
+            </div>
+
+            <div class="card-sub">
+                Retorno sobre stake
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-label">
+                Odd média
+            </div>
+
+            <div
+                class="card-value"
+                data-stat-average-odds
+            >
+                0,00
+            </div>
+
+            <div class="card-sub">
+                Todas as apostas
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-label">
+                Stake média
+            </div>
+
+            <div
+                class="card-value"
+                data-stat-average-stake
+            >
+                0,00 €
+            </div>
+
+            <div class="card-sub">
+                Todas as apostas
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MELHORES / PIORES -->
+
+    <section class="cards">
+
+        <div class="card">
+
+            <div class="card-label">
+                Maior lucro numa aposta
+            </div>
+
+            <div
+                class="card-value"
+                data-stat-best-profit
+            >
+                0,00 €
+            </div>
+
+            <div class="card-sub">
+                Melhor resultado
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-label">
+                Maior perda numa aposta
+            </div>
+
+            <div
+                class="card-value"
+                data-stat-worst-loss
+            >
+                0,00 €
+            </div>
+
+            <div class="card-sub">
+                Pior resultado
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-label">
+                Apostas pendentes
+            </div>
+
+            <div
+                class="card-value"
+                data-stat-pending
+            >
+                0
+            </div>
+
+            <div class="card-sub">
+                Ainda por resolver
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-label">
+                Stake pendente
+            </div>
+
+            <div
+                class="card-value"
+                data-stat-pending-stake
+            >
+                0,00 €
+            </div>
+
+            <div class="card-sub">
+                Em risco
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ANÁLISES -->
+
+    <section class="content-grid">
+
+
+        <!-- POR MERCADO -->
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Desempenho por mercado
+                    </h2>
+
+                    <p>
+                        Lucro e taxa de acerto por tipo de aposta
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="bets-table-wrapper">
+
+                <table class="bets-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Mercado
+                            </th>
+
+                            <th>
+                                Apostas
+                            </th>
+
+                            <th>
+                                Ganhas
+                            </th>
+
+                            <th>
+                                Perdidas
+                            </th>
+
+                            <th>
+                                Acerto
+                            </th>
+
+                            <th>
+                                Stake
+                            </th>
+
+                            <th>
+                                Lucro
+                            </th>
+
+                            <th>
+                                ROI
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody
+                        id="statistics-market-body"
+                    >
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- POR COMPETIÇÃO -->
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Desempenho por competição
+                    </h2>
+
+                    <p>
+                        Resultados por campeonato
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="bets-table-wrapper">
+
+                <table class="bets-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Competição
+                            </th>
+
+                            <th>
+                                Apostas
+                            </th>
+
+                            <th>
+                                Ganhas
+                            </th>
+
+                            <th>
+                                Perdidas
+                            </th>
+
+                            <th>
+                                Acerto
+                            </th>
+
+                            <th>
+                                Stake
+                            </th>
+
+                            <th>
+                                Lucro
+                            </th>
+
+                            <th>
+                                ROI
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody
+                        id="statistics-competition-body"
+                    >
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RESUMO DE PERFORMANCE -->
+
+    <div
+        class="panel"
+        style="margin-top: 24px;"
+    >
+
+        <div class="panel-header">
+
+            <div>
+
+                <h2>
+                    Resumo de performance
+                </h2>
+
+                <p>
+                    Informação calculada com base nas apostas resolvidas
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="statistics-summary"
+            style="
+                display: grid;
+                gap: 10px;
+                line-height: 1.6;
+            "
+        >
+        </div>
+
+    </div>
+
+</section>
+
 
         <!-- =========================
              DEFINIÇÕES
@@ -614,6 +1504,166 @@
 
             </div>
 
+            <div class="panel settings-panel">
+
+                <h2>🎯 Gestão de Stake</h2>
+
+                <p class="settings-description">
+                    Define como a aplicação deverá calcular e limitar as tuas stakes.
+                </p>
+
+
+                <div class="settings-field">
+
+                    <label for="stake-method">
+                        Método de stake
+                    </label>
+
+                    <select id="stake-method">
+
+                        <option value="percentage">
+                            Percentagem da banca
+                        </option>
+
+                        <option value="units">
+                            Unidades
+                        </option>
+
+                        <option value="fixed">
+                            Stake fixa
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="settings-field">
+
+                    <label for="default-stake-percentage">
+                        Stake padrão
+                    </label>
+
+                    <div class="input-money">
+
+                        <input
+                            id="default-stake-percentage"
+                            type="number"
+                            min="0.01"
+                            max="100"
+                            step="0.01"
+                            value="1"
+                        >
+
+                        <span>%</span>
+
+                </div>
+
+            </div>
+
+
+    <div class="settings-field">
+
+        <label for="max-stake-percentage">
+            Stake máxima
+        </label>
+
+        <div class="input-money">
+
+            <input
+                id="max-stake-percentage"
+                type="number"
+                min="0.01"
+                max="100"
+                step="0.01"
+                value="3"
+            >
+
+            <span>%</span>
+
+        </div>
+
+    </div>
+
+
+    <div class="settings-field">
+
+        <label for="max-exposure">
+            Exposição máxima
+        </label>
+
+        <div class="input-money">
+
+            <input
+                id="max-exposure"
+                type="number"
+                min="0.01"
+                max="100"
+                step="0.01"
+                value="10"
+            >
+
+            <span>%</span>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="settings-field"
+        id="unit-value-field"
+        style="display: none;"
+    >
+
+        <label for="unit-value">
+            Valor de 1 unidade
+        </label>
+
+        <div class="input-money">
+
+            <input
+                id="unit-value"
+                type="number"
+                min="0.01"
+                step="0.01"
+                value="10"
+            >
+
+            <span>€</span>
+
+        </div>
+
+    </div>
+
+
+    <button
+        id="save-stake-settings"
+        class="primary-button"
+    >
+        Guardar definições
+    </button>
+
+
+    <div
+        id="stake-settings-message"
+        class="settings-message"
+    ></div>
+
+
+    <div class="danger-zone">
+
+        <h3>ℹ️ Configuração inicial</h3>
+
+        <p>
+            Recomendamos começar com uma stake padrão de 1%,
+            uma stake máxima de 3% e uma exposição máxima de 10%.
+        </p>
+
+    </div>
+
+</div>
+
         </section>
 
 
@@ -684,12 +1734,18 @@
                                 Competição
                             </label>
 
-                            <input
+                            <select
                                 id="bet-competition"
-                                type="text"
-                                placeholder="Ex: Liga Portugal"
                                 required
                             >
+                                <option value="">Selecionar competição</option>
+                                <option value="PL">Premier League</option>
+                                <option value="PD">La Liga</option>
+                                <option value="BL1">Bundesliga</option>
+                                <option value="SA">Serie A</option>
+                                <option value="FL1">Ligue 1</option>
+                                <option value="PPL">Liga Portugal</option>
+                            </select>
 
                         </div>
 
@@ -708,12 +1764,13 @@
                                 Equipa da casa
                             </label>
 
-                            <input
+                            <select
                                 id="bet-home-team"
-                                type="text"
-                                placeholder="Ex: Benfica"
                                 required
+                                disabled
                             >
+                                <option value="">Selecionar equipa da casa</option>
+                            </select>
 
                         </div>
 
@@ -724,12 +1781,13 @@
                                 Equipa visitante
                             </label>
 
-                            <input
+                            <select
                                 id="bet-away-team"
-                                type="text"
-                                placeholder="Ex: Porto"
                                 required
+                                disabled
                             >
+                                <option value="">Selecionar equipa visitante</option>
+                            </select>
 
                         </div>
 
@@ -793,12 +1851,18 @@
                                 Seleção
                             </label>
 
-                            <input
+                            <select
                                 id="bet-selection"
-                                type="text"
-                                placeholder="Ex: Benfica"
                                 required
+                                disabled
                             >
+                                <option value="">Selecionar seleção</option>
+                            </select>
+
+                            <small
+                                id="bet-selection-help"
+                                class="selection-help"
+                            ></small>
 
                         </div>
 
@@ -843,6 +1907,35 @@
                                 placeholder="10.00"
                                 required
                             >
+
+                            <div
+                                id="stake-recommendation"
+                                class="stake-info"
+                            >
+                                Stake recomendada: 0,00 €
+                            </div>
+
+                            <div
+                                id="stake-maximum"
+                                class="stake-info"
+                            >
+                                Stake máxima permitida: 0,00 €
+                            </div>
+
+                            <div
+                                id="stake-exposure-info"
+                                class="stake-info"
+                            >
+                                Exposição após esta aposta: 0,00%
+                            </div>
+
+                            <button
+                                type="button"
+                                id="use-recommended-stake"
+                                class="secondary-button"
+                            >
+                                Usar stake recomendada
+                            </button>
 
                         </div>
 
@@ -896,13 +1989,1761 @@
 ========================== -->
 
 <script src="js/bankroll.js"></script>
-
 <script src="js/bets.js"></script>
-
+<script src="js/stakeSettings.js"></script>
+<script src="js/footballModel.js"></script>
 <script src="js/valueBet.js"></script>
-
 <script src="js/app.js"></script>
-```
+
+
+<script>
+/* =========================
+   VALUE BETS — INTERFACE
+========================== */
+
+(function () {
+
+    const STORAGE_KEY =
+        'footballBettingApp.valueBets';
+
+    let lastAnalysis = null;
+
+
+    function getSavedValueBets() {
+
+        try {
+
+            const data =
+                JSON.parse(
+                    localStorage.getItem(
+                        STORAGE_KEY
+                    ) || '[]'
+                );
+
+            return Array.isArray(data)
+                ? data
+                : [];
+
+        } catch (error) {
+
+            console.error(
+                'Erro ao carregar Value Bets:',
+                error
+            );
+
+            return [];
+
+        }
+
+    }
+
+
+    function saveSavedValueBets(
+        valueBets
+    ) {
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(valueBets)
+        );
+
+    }
+
+
+    function getValue(id) {
+
+        const element =
+            document.getElementById(id);
+
+        return element
+            ? element.value.trim()
+            : '';
+
+    }
+
+
+    function setAnalysisText(
+        attribute,
+        value
+    ) {
+
+        const element =
+            document.querySelector(
+                `[${attribute}]`
+            );
+
+        if (element) {
+
+            element.textContent = value;
+
+        }
+
+    }
+
+
+    function showAnalysisMessage(
+        message,
+        type
+    ) {
+
+        const element =
+            document.getElementById(
+                'value-bet-analysis-status'
+            );
+
+        if (!element) {
+
+            return;
+
+        }
+
+        element.textContent = message;
+
+        element.className =
+            `settings-message ${type || ''}`;
+
+    }
+
+
+    function resetAnalysis() {
+
+        lastAnalysis = null;
+
+        const result =
+            document.getElementById(
+                'value-bet-analysis-result'
+            );
+
+        const saveButton =
+            document.getElementById(
+                'save-value-bet'
+            );
+
+        if (result) {
+
+            result.style.display = 'none';
+
+        }
+
+        if (saveButton) {
+
+            saveButton.disabled = true;
+
+        }
+
+        showAnalysisMessage('', '');
+
+    }
+
+
+    async function calculateModelProbability() {
+
+        const leagueKey =
+            getValue('value-competition');
+
+        const homeTeam =
+            getValue('value-home-team');
+
+        const awayTeam =
+            getValue('value-away-team');
+
+        const market =
+            getValue('value-market');
+
+        const selection =
+            getValue('value-selection');
+
+        if (!leagueKey) {
+            showAnalysisMessage(
+                'Seleciona a competição.',
+                'error'
+            );
+            return null;
+        }
+
+        if (!homeTeam || !awayTeam) {
+            showAnalysisMessage(
+                'Indica a equipa da casa e a equipa visitante.',
+                'error'
+            );
+            return null;
+        }
+
+        if (!market || !selection) {
+            showAnalysisMessage(
+                'Seleciona o mercado e indica a seleção.',
+                'error'
+            );
+            return null;
+        }
+
+        if (
+            typeof FootballModel === 'undefined' ||
+            typeof FootballModel.estimate !== 'function'
+        ) {
+            showAnalysisMessage(
+                'O modelo estatístico não está disponível.',
+                'error'
+            );
+            return null;
+        }
+
+        const status =
+            document.getElementById(
+                'value-model-status'
+            );
+
+        if (status) {
+            status.textContent =
+                'A calcular a probabilidade com os dados históricos...';
+        }
+
+        const response =
+            await FootballModel.estimate({
+                leagueKey,
+                homeTeam,
+                awayTeam,
+                market,
+                selection
+            });
+
+        if (!response || !response.ok) {
+            if (status) {
+                status.textContent =
+                    'Não foi possível calcular a probabilidade.';
+            }
+
+            showAnalysisMessage(
+                response?.message ||
+                'Não foi possível calcular a probabilidade.',
+                'error'
+            );
+
+            return null;
+        }
+
+        const model =
+            response.data;
+
+        const probabilityPercent =
+            Number(model.estimatedProbability) * 100;
+
+        const probabilityInput =
+            document.getElementById(
+                'value-probability'
+            );
+
+        if (probabilityInput) {
+            probabilityInput.value =
+                probabilityPercent.toFixed(2);
+        }
+
+        setAnalysisText(
+            'data-analysis-xg-home',
+            Number(model.expectedGoals.homeXg).toFixed(2)
+        );
+
+        setAnalysisText(
+            'data-analysis-xg-away',
+            Number(model.expectedGoals.awayXg).toFixed(2)
+        );
+
+        if (status) {
+            const seasonLabel =
+                model.usingCurrentSeason
+                    ? `época ${model.currentSeason}`
+                    : `época ${model.season} (base histórica)`;
+
+            const leagueLabel =
+                model.leagueName ||
+                model.league?.name ||
+                model.league?.label ||
+                leagueKey ||
+                'Competição';
+
+            status.textContent =
+                `${model.homeTeam} vs ${model.awayTeam} — ${leagueLabel}. ${seasonLabel} • ${model.sampleMatches} jogos analisados.`;
+        }
+
+        return model;
+
+    }
+
+
+    async function analyzeValueBet(event) {
+
+        event.preventDefault();
+
+        const model =
+            await calculateModelProbability();
+
+        if (!model) {
+            return;
+        }
+
+        const probabilityPercent =
+            Number(getValue('value-probability'));
+
+        const probability =
+            probabilityPercent / 100;
+
+        const odds =
+            Number(getValue('value-odds'));
+
+        const stakeText =
+            getValue('value-stake');
+
+        const stake =
+            stakeText === ''
+                ? 0
+                : Number(stakeText);
+
+        if (!Number.isFinite(odds) || odds <= 1) {
+            showAnalysisMessage(
+                'A odd deve ser superior a 1.00.',
+                'error'
+            );
+            return;
+        }
+
+        if (!Number.isFinite(stake) || stake < 0) {
+            showAnalysisMessage(
+                'A stake não pode ser negativa.',
+                'error'
+            );
+            return;
+        }
+
+        if (
+            typeof ValueBets === 'undefined' ||
+            typeof ValueBets.analyze !== 'function'
+        ) {
+            showAnalysisMessage(
+                'O motor de Value Bets não está disponível.',
+                'error'
+            );
+            return;
+        }
+
+        const analysis =
+            ValueBets.analyze(
+                probability,
+                odds,
+                stake
+            );
+
+        if (!analysis.valid) {
+            showAnalysisMessage(
+                analysis.message ||
+                'Não foi possível analisar a aposta.',
+                'error'
+            );
+            return;
+        }
+
+        lastAnalysis = {
+            ...analysis,
+            model,
+            id:
+                `value-${Date.now()}-${Math.random()
+                    .toString(36)
+                    .slice(2, 8)}`,
+            date:
+                new Date().toISOString(),
+            homeTeam:
+                model.homeTeam,
+            awayTeam:
+                model.awayTeam,
+            competition:
+                model.leagueName,
+            leagueKey:
+                model.leagueKey,
+            market:
+                getValue('value-market'),
+            selection:
+                getValue('value-selection'),
+            odds,
+            stake
+        };
+
+        setAnalysisText(
+            'data-analysis-fair-odds',
+            Number(analysis.fairOdds).toFixed(2)
+        );
+
+        setAnalysisText(
+            'data-analysis-implied',
+            formatPercent(analysis.impliedProbability * 100)
+        );
+
+        setAnalysisText(
+            'data-analysis-edge',
+            formatPercent(analysis.edge * 100)
+        );
+
+        setAnalysisText(
+            'data-analysis-ev',
+            formatPercent(analysis.expectedValuePercentage * 100)
+        );
+
+        const result =
+            document.getElementById(
+                'value-bet-analysis-result'
+            );
+
+        if (result) {
+            result.style.display = 'block';
+        }
+
+        const saveButton =
+            document.getElementById(
+                'save-value-bet'
+            );
+
+        if (saveButton) {
+            saveButton.disabled =
+                !analysis.isValueBet;
+        }
+
+        if (analysis.isValueBet) {
+            showAnalysisMessage(
+                `VALUE BET encontrada — ${analysis.classification}. Edge de ${formatPercent(
+                    analysis.edge * 100
+                )}.`,
+                'success'
+            );
+        } else {
+            showAnalysisMessage(
+                'Esta aposta não apresenta valor positivo com os dados do modelo.',
+                'error'
+            );
+        }
+
+    }
+
+
+    function saveCurrentValueBet() {
+
+        if (
+            !lastAnalysis ||
+            !lastAnalysis.isValueBet
+        ) {
+
+            return;
+
+        }
+
+
+        const saved =
+            getSavedValueBets();
+
+
+        if (
+            !saved.some(
+                item =>
+                    item.id === lastAnalysis.id
+            )
+        ) {
+
+            saved.unshift(
+                lastAnalysis
+            );
+
+        }
+
+
+        saveSavedValueBets(saved);
+
+        const persisted =
+            getSavedValueBets();
+
+        const wasSaved =
+            persisted.some(
+                item =>
+                    item.id === lastAnalysis.id
+            );
+
+        renderSavedValueBets();
+
+        showAnalysisMessage(
+            wasSaved
+                ? 'Value Bet guardada com sucesso.'
+                : 'Não foi possível confirmar a gravação da Value Bet.',
+            wasSaved
+                ? 'success'
+                : 'error'
+        );
+
+    }
+
+
+    function renderSavedValueBets() {
+
+        const saved =
+            getSavedValueBets();
+
+        const tableBody =
+            document.getElementById(
+                'value-bets-table-body'
+            );
+
+        const emptyState =
+            document.getElementById(
+                'value-bets-empty-state'
+            );
+
+        if (!tableBody || !emptyState) {
+
+            return;
+
+        }
+
+        tableBody.innerHTML = '';
+
+        if (saved.length === 0) {
+
+            emptyState.style.display = 'flex';
+
+            return;
+
+        }
+
+        emptyState.style.display = 'none';
+
+        saved.forEach(opportunity => {
+
+            if (!opportunity.status) {
+                opportunity.status = 'active';
+            }
+
+            const isUsed =
+                opportunity.status === 'used';
+
+            const statusText =
+                isUsed
+                    ? 'Usada'
+                    : 'Ativa';
+
+            const statusClass =
+                isUsed
+                    ? 'pending'
+                    : 'won';
+
+            const row =
+                document.createElement('tr');
+
+            const game =
+                opportunity.homeTeam &&
+                opportunity.awayTeam
+                    ? `
+                        <strong>
+                            ${escapeHtml(
+                                typeof window.teamDisplayName === 'function'
+                                    ? window.teamDisplayName(opportunity.homeTeam)
+                                    : opportunity.homeTeam
+                            )}
+                        </strong>
+
+                        <span class="match-separator">
+                            vs
+                        </span>
+
+                        <strong>
+                            ${escapeHtml(
+                                typeof window.teamDisplayName === 'function'
+                                    ? window.teamDisplayName(opportunity.awayTeam)
+                                    : opportunity.awayTeam
+                            )}
+                        </strong>
+                    `
+                    : '-';
+
+            const probability =
+                Number(
+                    opportunity.estimatedProbability || 0
+                ) * 100;
+
+            const implied =
+                Number(
+                    opportunity.impliedProbability || 0
+                ) * 100;
+
+            const edge =
+                Number(
+                    opportunity.edge || 0
+                ) * 100;
+
+            const ev =
+                Number(
+                    opportunity.expectedValuePercentage || 0
+                ) * 100;
+
+            row.innerHTML = `
+
+                <td>
+                    ${game}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        opportunity.market || '-'
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        opportunity.selection || '-'
+                    )}
+                </td>
+
+                <td>
+                    ${Number(
+                        opportunity.odds || 0
+                    ).toFixed(2)}
+                </td>
+
+                <td>
+                    ${formatPercent(
+                        probability
+                    )}
+                </td>
+
+                <td>
+                    ${formatPercent(
+                        implied
+                    )}
+                </td>
+
+                <td class="profit-positive">
+                    +${formatPercent(
+                        edge
+                    )}
+                </td>
+
+                <td class="profit-positive">
+                    +${formatPercent(
+                        ev
+                    )}
+                </td>
+
+                <td>
+                    ${formatMoney(
+                        opportunity.stake || 0
+                    )}
+                </td>
+
+                <td>
+                    <span class="status ${statusClass}">
+                        ${statusText}
+                    </span>
+                </td>
+
+                <td>
+
+                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+
+                        ${
+                            isUsed
+                                ? `
+                                    <button
+                                        type="button"
+                                        class="secondary-button"
+                                        disabled
+                                    >
+                                        Usada
+                                    </button>
+                                `
+                                : `
+                                    <button
+                                        type="button"
+                                        class="primary-button"
+                                        data-use-value-bet="${escapeHtml(
+                                            opportunity.id || ''
+                                        )}"
+                                    >
+                                        Usar
+                                    </button>
+                                `
+                        }
+
+                        <button
+                            type="button"
+                            class="secondary-button"
+                            data-delete-value-bet="${escapeHtml(
+                                opportunity.id || ''
+                            )}"
+                        >
+                            Remover
+                        </button>
+
+                    </div>
+
+                </td>
+
+            `;
+
+            tableBody.appendChild(row);
+
+        });
+
+        tableBody
+            .querySelectorAll(
+                '[data-use-value-bet]'
+            )
+            .forEach(button => {
+
+                button.addEventListener(
+                    'click',
+                    () => {
+
+                        useSavedValueBet(
+                            button.dataset.useValueBet
+                        );
+
+                    }
+                );
+
+            });
+
+
+        tableBody
+            .querySelectorAll(
+                '[data-delete-value-bet]'
+            )
+            .forEach(button => {
+
+                button.addEventListener(
+                    'click',
+                    () => {
+
+                        removeSavedValueBet(
+                            button.dataset.deleteValueBet
+                        );
+
+                    }
+                );
+
+            });
+
+    }
+
+
+    function useSavedValueBet(id) {
+
+        const opportunity =
+            getSavedValueBets().find(
+                item =>
+                    item.id === id
+            );
+
+
+        if (!opportunity) {
+
+            showAnalysisMessage(
+                'Value Bet não encontrada.',
+                'error'
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * Marcar como usada.
+         * A Value Bet continua guardada, mas deixa
+         * de ser considerada uma oportunidade ativa.
+         */
+
+        if (opportunity.status !== 'used') {
+
+            const saved =
+                getSavedValueBets();
+
+            const index =
+                saved.findIndex(
+                    item =>
+                        item.id === id
+                );
+
+            if (index !== -1) {
+
+                saved[index] = {
+                    ...saved[index],
+                    status: 'used',
+                    usedAt:
+                        new Date().toISOString()
+                };
+
+                saveSavedValueBets(saved);
+
+                opportunity =
+                    saved[index];
+
+                renderSavedValueBets();
+
+            }
+
+        }
+
+
+        /*
+         * Vai para a página de apostas.
+         */
+
+        const betsNav =
+            document.querySelector(
+                '.nav-item[data-page="bets"]'
+            );
+
+
+        if (betsNav) {
+
+            betsNav.click();
+
+        } else if (
+            typeof showPage === 'function'
+        ) {
+
+            showPage('bets');
+
+        }
+
+
+        /*
+         * Abre o modal de nova aposta.
+         * A função prepareNewBetForm já existente
+         * limpa o formulário e prepara a data.
+         */
+
+        if (
+            typeof prepareNewBetForm === 'function'
+        ) {
+
+            prepareNewBetForm();
+
+        }
+
+
+        const modal =
+            document.getElementById(
+                'bet-modal'
+            );
+
+
+        if (!modal) {
+
+            return;
+
+        }
+
+
+        /*
+         * Preencher automaticamente os dados
+         * existentes na Value Bet.
+         */
+
+        const fields = {
+
+            'bet-date':
+                opportunity.date
+                    ? String(
+                        opportunity.date
+                    ).slice(0, 10)
+                    : '',
+
+            'bet-competition':
+                opportunity.competition || '',
+
+            'bet-home-team':
+                opportunity.homeTeam || '',
+
+            'bet-away-team':
+                opportunity.awayTeam || '',
+
+            'bet-market':
+                opportunity.market || '',
+
+            'bet-selection':
+                opportunity.selection || '',
+
+            'bet-odds':
+                opportunity.odds ?? '',
+
+            'bet-stake':
+                opportunity.stake > 0
+                    ? Number(
+                        opportunity.stake
+                    ).toFixed(2)
+                    : ''
+
+        };
+
+
+        Object.entries(fields)
+            .forEach(
+                ([fieldId, value]) => {
+
+                    const field =
+                        document.getElementById(
+                            fieldId
+                        );
+
+                    if (field) {
+
+                        field.value =
+                            value;
+
+                    }
+
+                }
+            );
+
+
+        if (typeof syncNewBetTeamDropdownsFromSavedValueBet === 'function') {
+
+            syncNewBetTeamDropdownsFromSavedValueBet(opportunity);
+
+        }
+
+        if (typeof window.refreshSelectionDropdowns === 'function') {
+
+            window.refreshSelectionDropdowns();
+
+            const selectionField = document.getElementById('bet-selection');
+
+            if (selectionField && opportunity.selection) {
+                selectionField.value = opportunity.selection;
+            }
+
+        }
+
+
+        /*
+         * Atualizar os indicadores de stake.
+         */
+
+        if (
+            typeof updateStakeRecommendation ===
+            'function'
+        ) {
+
+            updateStakeRecommendation();
+
+        }
+
+
+        modal.style.display =
+            'flex';
+
+
+        /*
+         * A Value Bet deixa de ser apenas
+         * uma oportunidade guardada.
+         * A partir daqui o utilizador decide
+         * se quer realmente guardar a aposta.
+         */
+
+        const status =
+            document.getElementById(
+                'value-bet-analysis-status'
+            );
+
+        if (status) {
+
+            status.textContent =
+                'Value Bet carregada para nova aposta.';
+
+            status.className =
+                'settings-message success';
+
+        }
+
+    }
+
+
+    function removeSavedValueBet(id) {
+
+        if (!id) {
+
+            return;
+
+        }
+
+        const saved =
+            getSavedValueBets()
+                .filter(
+                    item =>
+                        item.id !== id
+                );
+
+        saveSavedValueBets(saved);
+
+        renderSavedValueBets();
+
+    }
+
+
+    function clearValueBetForm() {
+
+        const form =
+            document.getElementById(
+                'value-bet-form'
+            );
+
+        if (form) {
+
+            form.reset();
+
+        }
+
+        resetAnalysis();
+
+    }
+
+
+    function initValueBetInterface() {
+
+        const form =
+            document.getElementById(
+                'value-bet-form'
+            );
+
+        const saveButton =
+            document.getElementById(
+                'save-value-bet'
+            );
+
+        const clearButton =
+            document.getElementById(
+                'clear-value-bet'
+            );
+
+        const calculateModelButton =
+            document.getElementById(
+                'calculate-model-probability'
+            );
+
+
+        if (form) {
+
+            form.addEventListener(
+                'submit',
+                analyzeValueBet
+            );
+
+        }
+
+
+        if (saveButton) {
+
+            saveButton.addEventListener(
+                'click',
+                saveCurrentValueBet
+            );
+
+        }
+
+
+        if (clearButton) {
+
+            clearButton.addEventListener(
+                'click',
+                clearValueBetForm
+            );
+
+        }
+
+
+        if (calculateModelButton) {
+
+            calculateModelButton.addEventListener(
+                'click',
+                calculateModelProbability
+            );
+
+        }
+
+
+        renderSavedValueBets();
+
+    }
+
+
+    window.renderSavedValueBets =
+        renderSavedValueBets;
+
+
+    if (
+        document.readyState === 'loading'
+    ) {
+
+        document.addEventListener(
+            'DOMContentLoaded',
+            initValueBetInterface
+        );
+
+    } else {
+
+        initValueBetInterface();
+
+    }
+
+})();
+</script>
+
+
+
+<script>
+/* =========================
+   EQUIPAS — DROPDOWNS
+========================== */
+
+(function () {
+
+    const LEAGUE_OPTIONS = [
+        { key: 'PL', name: 'Premier League' },
+        { key: 'PD', name: 'La Liga' },
+        { key: 'BL1', name: 'Bundesliga' },
+        { key: 'SA', name: 'Serie A' },
+        { key: 'FL1', name: 'Ligue 1' },
+        { key: 'PPL', name: 'Liga Portugal' }
+    ];
+
+    /*
+     * O modelo continua a trabalhar com o nome interno vindo
+     * do football-data.co.uk. Aqui apenas definimos o nome que
+     * o utilizador vê na aplicação.
+     */
+    const TEAM_DISPLAY_NAMES = {
+        'benfica': 'SL Benfica',
+        'slbenfica': 'SL Benfica',
+        'porto': 'FC Porto',
+        'fcporto': 'FC Porto',
+        'sportingcp': 'Sporting CP',
+        'sporting': 'Sporting CP',
+        'splisbon': 'Sporting CP',
+        'braga': 'SC Braga',
+        'spbraga': 'SC Braga',
+        'scbraga': 'SC Braga',
+        'vitoriaguimaraes': 'Vitória SC',
+        'guimaraes': 'Vitória SC',
+        'vitoriasc': 'Vitória SC',
+        'gilvicente': 'Gil Vicente FC',
+        'gilvicentefc': 'Gil Vicente FC',
+        'famalicao': 'FC Famalicão',
+        'fcfamalicao': 'FC Famalicão',
+        'estoril': 'Estoril Praia',
+        'estorilpraia': 'Estoril Praia',
+        'moreirense': 'Moreirense FC',
+        'moreirensefc': 'Moreirense FC',
+        'rioave': 'Rio Ave FC',
+        'rioavefc': 'Rio Ave FC',
+        'boavista': 'Boavista FC',
+        'boavistafc': 'Boavista FC',
+        'nacional': 'CD Nacional',
+        'cdnacional': 'CD Nacional',
+        'arouca': 'FC Arouca',
+        'fcarouca': 'FC Arouca',
+        'casapia': 'Casa Pia AC',
+        'casapiaac': 'Casa Pia AC',
+        'santaclara': 'CD Santa Clara',
+        'cdsantaclara': 'CD Santa Clara',
+        'maritimo': 'CS Marítimo',
+        'csmaritimo': 'CS Marítimo',
+        'tondela': 'CD Tondela',
+        'cdtondela': 'CD Tondela',
+        'aves': 'AVS',
+        'avs': 'AVS',
+        'avssad': 'AVS',
+        'alverca': 'FC Alverca',
+        'fcalverca': 'FC Alverca',
+        'estrela': 'CF Estrela da Amadora',
+        'cfestrelaamadora': 'CF Estrela da Amadora',
+
+        'mancity': 'Manchester City',
+        'manunited': 'Manchester United',
+        'manchesterunited': 'Manchester United',
+        'nottmforest': 'Nottingham Forest',
+        'tottenham': 'Tottenham Hotspur',
+        'spurs': 'Tottenham Hotspur',
+        'wolves': 'Wolverhampton Wanderers',
+        'newcastle': 'Newcastle United',
+        'westham': 'West Ham United',
+        'brighton': 'Brighton & Hove Albion',
+        'crystalpalace': 'Crystal Palace',
+        'astonvilla': 'Aston Villa',
+        'leeds': 'Leeds United',
+        'sunderland': 'Sunderland AFC',
+        'everton': 'Everton FC',
+        'liverpool': 'Liverpool FC',
+        'arsenal': 'Arsenal FC',
+        'chelsea': 'Chelsea FC',
+        'fulham': 'Fulham FC',
+        'brentford': 'Brentford FC',
+        'bournemouth': 'AFC Bournemouth',
+        'coventry': 'Coventry City FC',
+        'hull': 'Hull City AFC',
+        'ipswich': 'Ipswich Town FC',
+        'burnley': 'Burnley FC',
+
+        'realmadrid': 'Real Madrid CF',
+        'barcelona': 'FC Barcelona',
+        'atleticomadrid': 'Atlético de Madrid',
+        'athleticclub': 'Athletic Club',
+        'realsociedad': 'Real Sociedad',
+        'villarreal': 'Villarreal CF',
+        'sevilla': 'Sevilla FC',
+        'valencia': 'Valencia CF',
+        'betis': 'Real Betis',
+        'rayo': 'Rayo Vallecano',
+        'rayovallecano': 'Rayo Vallecano',
+        'celta': 'RC Celta',
+        'getafe': 'Getafe CF',
+        'girona': 'Girona FC',
+        'mallorca': 'RCD Mallorca',
+        'osasuna': 'CA Osasuna',
+        'espanyol': 'RCD Espanyol',
+        'alaves': 'Deportivo Alavés',
+        'elche': 'Elche CF',
+        'alaves': 'Deportivo Alavés',
+        'athbilbao': 'Athletic Club',
+        'athmadrid': 'Atlético de Madrid',
+        'barcelona': 'FC Barcelona',
+        'betis': 'Real Betis',
+        'celta': 'RC Celta',
+        'espanol': 'RCD Espanyol',
+        'getafe': 'Getafe CF',
+        'lacoruna': 'RC Deportivo',
+        'levante': 'Levante UD',
+        'malaga': 'Málaga CF',
+        'osasuna': 'CA Osasuna',
+        'racingsantander': 'Racing Santander',
+        'rayovallecano': 'Rayo Vallecano',
+        'realmadrid': 'Real Madrid CF',
+        'realsociedad': 'Real Sociedad',
+        'sevilla': 'Sevilla FC',
+        'valencia': 'Valencia CF',
+        'villarreal': 'Villarreal CF',
+        'oviedo': 'Real Oviedo',
+
+        'bayernmunich': 'Bayern Munich',
+        'dortmund': 'Borussia Dortmund',
+        'leverkusen': 'Bayer Leverkusen',
+        'rbleipzig': 'RB Leipzig',
+        'einfrankfurt': 'Eintracht Frankfurt',
+        'freiburg': 'SC Freiburg',
+        'stuttgart': 'VfB Stuttgart',
+        'wolfsburg': 'VfL Wolfsburg',
+        'werderbremen': 'Werder Bremen',
+        'unionberlin': 'Union Berlin',
+        'mainz': 'Mainz 05',
+        'monchengladbach': 'Borussia Mönchengladbach',
+        'hoffenheim': 'TSG Hoffenheim',
+        'stpauli': 'FC St. Pauli',
+        'augsburg': 'FC Augsburg',
+        'heidenheim': '1. FC Heidenheim',
+        'hamburg': 'Hamburger SV',
+        'koln': '1. FC Köln',
+
+        'inter': 'Inter Milan',
+        'internazionale': 'Inter Milan',
+        'milan': 'AC Milan',
+        'juventus': 'Juventus FC',
+        'napoli': 'SSC Napoli',
+        'roma': 'AS Roma',
+        'lazio': 'SS Lazio',
+        'atalanta': 'Atalanta BC',
+        'fiorentina': 'ACF Fiorentina',
+        'bologna': 'Bologna FC',
+        'torino': 'Torino FC',
+        'genoa': 'Genoa CFC',
+        'udinese': 'Udinese Calcio',
+        'verona': 'Hellas Verona',
+        'cagliari': 'Cagliari Calcio',
+        'parma': 'Parma Calcio',
+        'lecce': 'US Lecce',
+        'como': 'Como 1907',
+        'sassuolo': 'US Sassuolo',
+        'pisa': 'Pisa SC',
+        'cremonese': 'US Cremonese',
+
+        'psg': 'Paris Saint-Germain',
+        'parissg': 'Paris Saint-Germain',
+        'marseille': 'Olympique Marseille',
+        'lyon': 'Olympique Lyonnais',
+        'monaco': 'AS Monaco',
+        'lille': 'LOSC Lille',
+        'nice': 'OGC Nice',
+        'rennes': 'Stade Rennais',
+        'nantes': 'FC Nantes',
+        'strasbourg': 'RC Strasbourg',
+        'lens': 'RC Lens',
+        'toulouse': 'Toulouse FC',
+        'brest': 'Stade Brestois',
+        'montpellier': 'Montpellier HSC',
+        'reims': 'Stade de Reims',
+        'auxerre': 'AJ Auxerre',
+        'angers': 'Angers SCO',
+        'lehavre': 'Le Havre AC',
+        'lorient': 'FC Lorient',
+        'metz': 'FC Metz'
+    };
+
+    function normalizeTeamName(value) {
+        return String(value || '')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+            .replace(/[^a-z0-9]/g, '');
+    }
+
+    function teamDisplayName(internalName) {
+        const normalized = normalizeTeamName(internalName);
+        return TEAM_DISPLAY_NAMES[normalized] || internalName;
+    }
+
+    function getLeagueKeyFromCompetitionValue(value) {
+        const normalized = String(value || '').trim();
+
+        if (LEAGUE_OPTIONS.some(item => item.key === normalized)) {
+            return normalized;
+        }
+
+        const match = LEAGUE_OPTIONS.find(item =>
+            item.name.toLowerCase() === normalized.toLowerCase()
+        );
+
+        return match ? match.key : '';
+    }
+
+    function setOptions(select, teams, placeholder) {
+        if (!select) return;
+
+        const previousValue = select.value;
+
+        select.innerHTML = '';
+
+        const first = document.createElement('option');
+        first.value = '';
+        first.textContent = placeholder;
+        select.appendChild(first);
+
+        teams.forEach(team => {
+            const option = document.createElement('option');
+            option.value = team.internalName;
+            option.textContent = team.displayName;
+            select.appendChild(option);
+        });
+
+        select.disabled = teams.length === 0;
+
+        if (previousValue && teams.some(team => team.internalName === previousValue)) {
+            select.value = previousValue;
+        }
+    }
+
+    async function loadTeamsForLeague(leagueKey, homeId, awayId) {
+        const homeSelect = document.getElementById(homeId);
+        const awaySelect = document.getElementById(awayId);
+
+        if (!homeSelect || !awaySelect) return;
+
+        setOptions(homeSelect, [], 'A carregar equipas...');
+        setOptions(awaySelect, [], 'A carregar equipas...');
+
+        if (!leagueKey ||
+            typeof FootballModel === 'undefined' ||
+            typeof FootballModel.getLeagueTeams !== 'function') {
+            setOptions(homeSelect, [], 'Selecionar equipa da casa');
+            setOptions(awaySelect, [], 'Selecionar equipa visitante');
+            return;
+        }
+
+        try {
+            // IMPORTANTE: o dropdown usa exclusivamente a composição
+            // da época atual, incluindo jogos futuros já presentes
+            // no calendário. Não usa a lista de equipas da época
+            // anterior que serve de base ao modelo estatístico.
+            const response = await FootballModel.getLeagueTeams(leagueKey);
+
+            if (!response || !response.ok || !response.data) {
+                throw new Error(response?.message || 'Não foi possível carregar as equipas da época atual.');
+            }
+
+            const internalNames = Array.isArray(response.data.teams)
+                ? response.data.teams
+                : [];
+
+            const teams = internalNames
+                .map(internalName => ({
+                    internalName,
+                    displayName: teamDisplayName(internalName)
+                }))
+                .sort((a, b) =>
+                    a.displayName.localeCompare(
+                        b.displayName,
+                        'pt-PT',
+                        { sensitivity: 'base' }
+                    )
+                );
+
+            setOptions(homeSelect, teams, 'Selecionar equipa da casa');
+            setOptions(awaySelect, teams, 'Selecionar equipa visitante');
+
+        } catch (error) {
+            console.error('Erro ao carregar equipas da época atual:', error);
+            setOptions(homeSelect, [], 'Não foi possível carregar as equipas');
+            setOptions(awaySelect, [], 'Não foi possível carregar as equipas');
+        }
+    }
+
+    function preventSameTeam(homeId, awayId) {
+        const home = document.getElementById(homeId);
+        const away = document.getElementById(awayId);
+
+        if (!home || !away) return;
+
+        const selectedHome = home.value;
+
+        Array.from(away.options).forEach(option => {
+            option.disabled = Boolean(option.value && option.value === selectedHome);
+        });
+
+        if (away.value === selectedHome) {
+            away.value = '';
+        }
+    }
+
+    function setupTeamDropdownPair(competitionId, homeId, awayId) {
+        const competition = document.getElementById(competitionId);
+        const home = document.getElementById(homeId);
+        const away = document.getElementById(awayId);
+
+        if (!competition || !home || !away) return;
+
+        competition.addEventListener('change', async () => {
+            const leagueKey = getLeagueKeyFromCompetitionValue(competition.value);
+            await loadTeamsForLeague(leagueKey, homeId, awayId);
+        });
+
+        home.addEventListener('change', () => {
+            preventSameTeam(homeId, awayId);
+        });
+
+        away.addEventListener('change', () => {
+            const selectedAway = away.value;
+
+            Array.from(home.options).forEach(option => {
+                option.disabled = Boolean(option.value && option.value === selectedAway);
+            });
+        });
+
+        if (competition.value) {
+            const leagueKey = getLeagueKeyFromCompetitionValue(competition.value);
+            loadTeamsForLeague(leagueKey, homeId, awayId);
+        }
+    }
+
+    function setupLeagueOptionsForNewBet() {
+        const competition = document.getElementById('bet-competition');
+
+        if (!competition) return;
+
+        competition.innerHTML = '';
+
+        const first = document.createElement('option');
+        first.value = '';
+        first.textContent = 'Selecionar competição';
+        competition.appendChild(first);
+
+        LEAGUE_OPTIONS.forEach(league => {
+            const option = document.createElement('option');
+            option.value = league.key;
+            option.textContent = league.name;
+            competition.appendChild(option);
+        });
+    }
+
+    window.syncNewBetTeamDropdownsFromSavedValueBet = async function (opportunity) {
+        const competition = document.getElementById('bet-competition');
+        const home = document.getElementById('bet-home-team');
+        const away = document.getElementById('bet-away-team');
+
+        if (!competition || !home || !away || !opportunity) return;
+
+        const leagueKey = getLeagueKeyFromCompetitionValue(
+            opportunity.leagueKey || opportunity.competition || ''
+        );
+
+        if (!leagueKey) return;
+
+        competition.value = leagueKey;
+
+        await loadTeamsForLeague(
+            leagueKey,
+            'bet-home-team',
+            'bet-away-team'
+        );
+
+        home.value = opportunity.homeTeam || '';
+        away.value = opportunity.awayTeam || '';
+
+        preventSameTeam('bet-home-team', 'bet-away-team');
+    };
+
+    window.teamDisplayName = teamDisplayName;
+
+    function initTeamDropdowns() {
+        setupLeagueOptionsForNewBet();
+
+        setupTeamDropdownPair(
+            'value-competition',
+            'value-home-team',
+            'value-away-team'
+        );
+
+        setupTeamDropdownPair(
+            'bet-competition',
+            'bet-home-team',
+            'bet-away-team'
+        );
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initTeamDropdowns);
+    } else {
+        initTeamDropdowns();
+    }
+
+})();
+</script>
+
+
+<script>
+/* =========================
+   SELEÇÕES — DROPDOWN DINÂMICA
+========================== */
+
+(function () {
+
+    const MARKET_OPTIONS = {
+
+        '1X2': {
+            type: 'select',
+            getOptions: function (prefix) {
+                const home = getTeamDisplay(prefix, 'home', 'Casa');
+                const away = getTeamDisplay(prefix, 'away', 'Fora');
+
+                return [
+                    { value: '1', label: `1 — ${home}` },
+                    { value: 'X', label: 'X — Empate' },
+                    { value: '2', label: `2 — ${away}` }
+                ];
+            },
+            help: 'Seleciona 1 para vitória da equipa da casa, X para empate ou 2 para vitória da equipa visitante.'
+        },
+
+        'Dupla Chance': {
+            type: 'select',
+            getOptions: function (prefix) {
+                const home = getTeamDisplay(prefix, 'home', 'Casa');
+                const away = getTeamDisplay(prefix, 'away', 'Fora');
+
+                return [
+                    { value: '1X', label: `1X — ${home} ou empate` },
+                    { value: 'X2', label: `X2 — Empate ou ${away}` },
+                    { value: '12', label: `12 — ${home} ou ${away}` }
+                ];
+            },
+            help: '1X = casa ou empate • X2 = empate ou fora • 12 = casa ou fora.'
+        },
+
+        'Over/Under': {
+            type: 'select',
+            getOptions: function (_prefix) {
+                return [
+                    { value: 'Over 0.5', label: 'Over 0.5 — Mais de 0,5 golos' },
+                    { value: 'Under 0.5', label: 'Under 0.5 — Menos de 0,5 golos' },
+                    { value: 'Over 1.5', label: 'Over 1.5 — Mais de 1,5 golos' },
+                    { value: 'Under 1.5', label: 'Under 1.5 — Menos de 1,5 golos' },
+                    { value: 'Over 2.5', label: 'Over 2.5 — Mais de 2,5 golos' },
+                    { value: 'Under 2.5', label: 'Under 2.5 — Menos de 2,5 golos' },
+                    { value: 'Over 3.5', label: 'Over 3.5 — Mais de 3,5 golos' },
+                    { value: 'Under 3.5', label: 'Under 3.5 — Menos de 3,5 golos' },
+                    { value: 'Over 4.5', label: 'Over 4.5 — Mais de 4,5 golos' },
+                    { value: 'Under 4.5', label: 'Under 4.5 — Menos de 4,5 golos' }
+                ];
+            },
+            help: 'Escolhe se haverá mais (Over) ou menos (Under) golos do que a linha indicada.'
+        },
+
+        'Ambas Marcam': {
+            type: 'select',
+            getOptions: function (_prefix) {
+                return [
+                    { value: 'Sim', label: 'Sim — Ambas as equipas marcam' },
+                    { value: 'Não', label: 'Não — Pelo menos uma equipa não marca' }
+                ];
+            },
+            help: 'Sim = ambas as equipas marcam pelo menos um golo. Não = pelo menos uma fica sem marcar.'
+        },
+
+        'Handicap': {
+            type: 'input',
+            placeholder: 'Ex: -1.0 ou +1.5',
+            help: 'Escreve a seleção do handicap, por exemplo: SL Benfica -1.0.'
+        },
+
+        'Outro': {
+            type: 'input',
+            placeholder: 'Escreve a seleção',
+            help: 'Escreve exatamente a seleção disponibilizada pela casa de apostas.'
+        }
+    };
+
+    function getTeamDisplay(prefix, side, fallback) {
+        const select = document.getElementById(`${prefix}-${side}-team`);
+
+        if (!select || !select.value) return fallback;
+
+        const option = select.options[select.selectedIndex];
+        if (option && option.textContent) return option.textContent.trim();
+
+        if (typeof window.teamDisplayName === 'function') {
+            return window.teamDisplayName(select.value);
+        }
+
+        return select.value;
+    }
+
+    function setSelectionField(prefix, preserveValue) {
+        const market = document.getElementById(`${prefix}-market`);
+        const container = market?.closest('.form-group');
+        const current = preserveValue || '';
+        const oldField = document.getElementById(`${prefix}-selection`);
+        const help = document.getElementById(`${prefix}-selection-help`);
+
+        if (!market || !oldField || !container) return;
+
+        const config = MARKET_OPTIONS[market.value];
+
+        if (!config) {
+            oldField.innerHTML = '<option value="">Selecionar o mercado primeiro</option>';
+            oldField.disabled = true;
+            oldField.required = true;
+            if (help) help.textContent = '';
+            return;
+        }
+
+        let field = oldField;
+
+        if (config.type === 'input') {
+            if (oldField.tagName.toLowerCase() !== 'input') {
+                field = document.createElement('input');
+                field.id = oldField.id;
+                field.className = oldField.className;
+                field.required = true;
+                oldField.replaceWith(field);
+            }
+
+            field.type = 'text';
+            field.placeholder = config.placeholder || '';
+            field.disabled = false;
+            field.value = current;
+
+        } else {
+            if (oldField.tagName.toLowerCase() !== 'select') {
+                field = document.createElement('select');
+                field.id = oldField.id;
+                field.className = oldField.className;
+                field.required = true;
+                oldField.replaceWith(field);
+            }
+
+            const options = config.getOptions(prefix);
+            field.innerHTML = '';
+
+            const placeholder = document.createElement('option');
+            placeholder.value = '';
+            placeholder.textContent = 'Selecionar seleção';
+            field.appendChild(placeholder);
+
+            options.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.value;
+                option.textContent = item.label;
+                field.appendChild(option);
+            });
+
+            field.disabled = false;
+            field.value = options.some(item => item.value === current)
+                ? current
+                : '';
+        }
+
+        if (help) {
+            help.textContent = config.help || '';
+        }
+    }
+
+    function setupSelection(prefix) {
+        const market = document.getElementById(`${prefix}-market`);
+        if (!market) return;
+
+        market.addEventListener('change', function () {
+            setSelectionField(prefix);
+        });
+
+        const home = document.getElementById(`${prefix}-home-team`);
+        const away = document.getElementById(`${prefix}-away-team`);
+
+        if (home) {
+            home.addEventListener('change', function () {
+                const field = document.getElementById(`${prefix}-selection`);
+                const current = field ? field.value : '';
+                if (market.value === '1X2' || market.value === 'Dupla Chance') {
+                    setSelectionField(prefix, current);
+                }
+            });
+        }
+
+        if (away) {
+            away.addEventListener('change', function () {
+                const field = document.getElementById(`${prefix}-selection`);
+                const current = field ? field.value : '';
+                if (market.value === '1X2' || market.value === 'Dupla Chance') {
+                    setSelectionField(prefix, current);
+                }
+            });
+        }
+
+        setSelectionField(prefix);
+    }
+
+    window.refreshSelectionDropdowns = function () {
+        ['value', 'bet'].forEach(prefix => {
+            const market = document.getElementById(`${prefix}-market`);
+            if (market && market.value) {
+                const field = document.getElementById(`${prefix}-selection`);
+                setSelectionField(prefix, field ? field.value : '');
+            }
+        });
+    };
+
+    function initSelectionDropdowns() {
+        setupSelection('value');
+        setupSelection('bet');
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initSelectionDropdowns);
+    } else {
+        initSelectionDropdowns();
+    }
+
+})();
+</script>
 
 </body>
 

@@ -1,0 +1,260 @@
+<section id="valuebets-page" class="page">
+
+    <div class="topbar">
+
+        <div>
+            <h1>Value Bets</h1>
+
+            <p>
+                Analisa se uma aposta tem valor esperado positivo.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="valuebets-grid">
+
+        <!-- CALCULADORA -->
+
+        <div class="panel valuebets-calculator">
+
+            <div class="panel-header">
+
+                <div>
+                    <h2>Calculadora de Value Bet</h2>
+
+                    <p>
+                        Introduz a odd e a tua probabilidade estimada.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="valuebet-field">
+
+                <label for="valuebet-odds">
+                    Odd
+                </label>
+
+                <input
+                    id="valuebet-odds"
+                    type="number"
+                    min="1.01"
+                    step="0.01"
+                    placeholder="Ex.: 2.10"
+                >
+
+            </div>
+
+
+            <div class="valuebet-field">
+
+                <label for="valuebet-probability">
+                    Probabilidade estimada
+                </label>
+
+                <div class="valuebet-input-suffix">
+
+                    <input
+                        id="valuebet-probability"
+                        type="number"
+                        min="0.01"
+                        max="99.99"
+                        step="0.01"
+                        placeholder="Ex.: 50"
+                    >
+
+                    <span>%</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="valuebet-field">
+
+                <label for="valuebet-stake">
+                    Stake
+                </label>
+
+                <div class="valuebet-input-suffix">
+
+                    <input
+                        id="valuebet-stake"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        placeholder="Ex.: 10"
+                    >
+
+                    <span>€</span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="calculate-valuebet"
+                class="primary-button"
+                type="button"
+            >
+                Calcular Value Bet
+            </button>
+
+
+            <div
+                id="valuebet-error"
+                class="valuebet-error"
+            ></div>
+
+        </div>
+
+
+        <!-- RESULTADO -->
+
+        <div class="panel valuebets-result">
+
+            <div class="panel-header">
+
+                <div>
+                    <h2>Resultado</h2>
+
+                    <p>
+                        Análise da aposta.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div
+                id="valuebet-result-empty"
+                class="empty-state"
+            >
+
+                <span>🎯</span>
+
+                <strong>
+                    Ainda não foi feita nenhuma análise
+                </strong>
+
+                <p>
+                    Introduz os dados ao lado para começar.
+                </p>
+
+            </div>
+
+
+            <div
+                id="valuebet-result"
+                class="valuebet-result-content"
+                style="display: none;"
+            >
+
+                <div
+                    id="valuebet-verdict"
+                    class="valuebet-verdict"
+                ></div>
+
+
+                <div class="valuebet-results-grid">
+
+                    <div class="valuebet-result-card">
+
+                        <span>
+                            Probabilidade implícita
+                        </span>
+
+                        <strong
+                            id="valuebet-implied"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="valuebet-result-card">
+
+                        <span>
+                            Odd justa
+                        </span>
+
+                        <strong
+                            id="valuebet-fair-odds"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="valuebet-result-card">
+
+                        <span>
+                            Edge
+                        </span>
+
+                        <strong
+                            id="valuebet-edge"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="valuebet-result-card">
+
+                        <span>
+                            Value
+                        </span>
+
+                        <strong
+                            id="valuebet-value"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="valuebet-result-card">
+
+                        <span>
+                            EV esperado
+                        </span>
+
+                        <strong
+                            id="valuebet-ev"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="valuebet-explanation">
+
+                    <strong>
+                        Como interpretar:
+                    </strong>
+
+                    <p id="valuebet-explanation-text">
+                        —
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
