@@ -1815,6 +1815,45 @@ ipcMain.handle(
     }
 );
 
+ipcMain.handle(
+    'football-model:league-teams',
+    async (_event, leagueKey) => {
+        try {
+            if (!LEAGUES[leagueKey]) {
+                return {
+                    ok: false,
+                    message: 'Liga inválida.'
+                };
+            }
+
+            const data = await getLeagueData(leagueKey);
+
+            const teams = Array.from(
+                data.teams.keys()
+            ).sort((a, b) =>
+                a.localeCompare(
+                    b,
+                    'pt',
+                    {
+                        sensitivity: 'base'
+                    }
+                )
+            );
+
+            return {
+                ok: true,
+                data: teams
+            };
+        } catch (error) {
+            return {
+                ok: false,
+                message:
+                    error.message ||
+                    'Não foi possível carregar as equipas.'
+            };
+        }
+    }
+);
 
 ipcMain.handle(
     'football-model:leagues',

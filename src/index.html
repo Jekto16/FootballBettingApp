@@ -61,8 +61,8 @@
                 class="nav-item"
                 data-page="value-bets"
             >
-                <span>🎯</span>
-                Value Bets
+                <span>🔎</span>
+                Analisar Jogo
             </button>
 
 
@@ -390,390 +390,393 @@
 
         </section>
 
-                <!-- =========================
-             VALUE BETS
-        ========================== -->
+<!-- =========================
+     ANALISAR JOGO
+========================== -->
 
-        <section
-            class="page"
-            id="value-bets-page"
-            style="display: none;"
-        >
+<section
+    class="page"
+    id="value-bets-page"
+    style="display: none;"
+>
 
-            <header class="topbar">
+    <header class="topbar">
 
-                <div>
+        <div>
 
-                    <h1>
-                        Value Bets
-                    </h1>
+            <h1>
+                Analisar Jogo
+            </h1>
 
-                    <p>
-                        Encontra apostas com valor esperado positivo
-                    </p>
+            <p>
+                Analisa um jogo e encontra oportunidades de valor nos principais mercados
+            </p>
 
-                </div>
+        </div>
 
-            </header>
+    </header>
 
 
-            <!-- RESUMO -->
+    <!-- =========================
+         IDENTIFICAÇÃO DO JOGO
+    ========================== -->
 
-            <section class="cards">
+    <div class="panel">
 
-                <div class="card">
+        <div class="panel-header">
 
-                    <div class="card-label">
-                        Oportunidades
-                    </div>
+            <div>
 
-                    <div
-                        class="card-value"
-                        data-value-bets-count
-                    >
-                        0
-                    </div>
+                <h2>
+                    🏟️ Jogo
+                </h2>
 
-                    <div class="card-sub">
-                        Value Bets encontradas
-                    </div>
-
-                </div>
-
-
-                <div class="card">
-
-                    <div class="card-label">
-                        Melhor Value Bet
-                    </div>
-
-                    <div
-                        class="card-value"
-                        data-best-value-edge
-                    >
-                        0,00%
-                    </div>
-
-                    <div class="card-sub">
-                        Maior edge
-                    </div>
-
-                </div>
-
-
-                <div class="card">
-
-                    <div class="card-label">
-                        EV médio
-                    </div>
-
-                    <div
-                        class="card-value"
-                        data-average-value-ev
-                    >
-                        0,00%
-                    </div>
-
-                    <div class="card-sub">
-                        Valor esperado
-                    </div>
-
-                </div>
-
-
-                <div class="card">
-
-                    <div class="card-label">
-                        Stake recomendada
-                    </div>
-
-                    <div
-                        class="card-value"
-                        data-value-recommended-stake
-                    >
-                        0,00 €
-                    </div>
-
-                    <div class="card-sub">
-                        Próxima aposta
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =========================
-                 ANALISAR VALUE BET
-            ========================== -->
-
-            <div class="panel value-bet-analyzer">
-
-                <div class="panel-header">
-                    <div>
-                        <h2>🎯 Analisar Value Bet</h2>
-                        <p>O modelo estatístico calcula a probabilidade com base nos resultados históricos da competição e verifica se existe valor.</p>
-                    </div>
-                </div>
-
-                <form id="value-bet-form">
-                    <div class="form-row">
-
-                        <div class="form-group">
-                            <label for="value-competition">Competição</label>
-                            <select id="value-competition" required>
-                                <option value="">Selecionar competição</option>
-                                <option value="PL">Premier League</option>
-                                <option value="PD">La Liga</option>
-                                <option value="BL1">Bundesliga</option>
-                                <option value="SA">Serie A</option>
-                                <option value="FL1">Ligue 1</option>
-                                <option value="PPL">Liga Portugal</option>
-                            </select>
-                        </div>
-
-                    </div>
-
-                    <div class="form-row">
-
-                        <div class="form-group">
-                            <label for="value-home-team">Equipa da casa</label>
-                            <select id="value-home-team" required disabled>
-                                <option value="">Selecionar equipa da casa</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="value-away-team">Equipa visitante</label>
-                            <select id="value-away-team" required disabled>
-                                <option value="">Selecionar equipa visitante</option>
-                            </select>
-                        </div>
-
-                    </div>
-
-                    <div class="form-row">
-
-                        <div class="form-group">
-                            <label for="value-market">Mercado</label>
-                            <select id="value-market" required>
-                                <option value="">Selecionar mercado</option>
-                                <option value="1X2">1X2</option>
-                                <option value="Dupla Chance">Dupla Chance</option>
-                                <option value="Over/Under">Over / Under</option>
-                                <option value="Ambas Marcam">Ambas Marcam</option>
-                                <option value="Handicap">Handicap</option>
-                                <option value="Outro">Outro</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="value-selection">Seleção</label>
-                            <select id="value-selection" required disabled>
-                                <option value="">Selecionar seleção</option>
-                            </select>
-
-                            <small
-                                id="value-selection-help"
-                                class="selection-help"
-                            ></small>
-                        </div>
-
-                    </div>
-
-                    <div class="form-row">
-
-                        <div class="form-group">
-                            <label for="value-odds">Odd</label>
-                            <input id="value-odds" type="number" min="1.01" step="0.01" placeholder="2.10" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="value-probability">Probabilidade do modelo</label>
-                            <div class="input-money">
-                                <input id="value-probability" type="number" min="0.01" max="99.99" step="0.01" placeholder="Calculada automaticamente" readonly required>
-                                <span>%</span>
-                            </div>
-                            <div id="value-model-status" class="stake-info">
-                                Seleciona a competição, as equipas e a seleção.
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="value-stake">Stake</label>
-                            <input id="value-stake" type="number" min="0" step="0.01" placeholder="10.00">
-                        </div>
-
-                    </div>
-
-                    <div id="value-bet-analysis-result" style="display:none;">
-
-                        <div class="cards">
-
-                            <div class="card">
-                                <div class="card-label">Odd justa</div>
-                                <div class="card-value" data-analysis-fair-odds>0,00</div>
-                            </div>
-
-                            <div class="card">
-                                <div class="card-label">Prob. implícita</div>
-                                <div class="card-value" data-analysis-implied>0,00%</div>
-                            </div>
-
-                            <div class="card">
-                                <div class="card-label">Edge</div>
-                                <div class="card-value" data-analysis-edge>0,00%</div>
-                            </div>
-
-                            <div class="card">
-                                <div class="card-label">EV</div>
-                                <div class="card-value" data-analysis-ev>0,00%</div>
-                            </div>
-
-                            <div class="card">
-                                <div class="card-label">xG Casa</div>
-                                <div class="card-value" data-analysis-xg-home>0,00</div>
-                            </div>
-
-                            <div class="card">
-                                <div class="card-label">xG Fora</div>
-                                <div class="card-value" data-analysis-xg-away>0,00</div>
-                            </div>
-
-                        </div>
-
-                        <div id="value-bet-analysis-status" class="settings-message"></div>
-
-                        <div class="modal-actions">
-
-                            <button type="button" id="save-value-bet" class="primary-button" disabled>
-                                Guardar Value Bet
-                            </button>
-
-                            <button type="button" id="clear-value-bet" class="secondary-button">
-                                Limpar
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                    <div class="modal-actions">
-                        <button type="button" id="calculate-model-probability" class="secondary-button">
-                            Calcular probabilidade
-                        </button>
-
-                        <button type="submit" class="primary-button">
-                            Analisar Value Bet
-                        </button>
-                    </div>
-
-                </form>
+                <p>
+                    Seleciona o jogo que queres analisar
+                </p>
 
             </div>
 
-            <!-- VALUE BETS -->
+        </div>
 
-            <div class="panel">
 
-                <div class="panel-header">
+        <form id="match-analysis-form">
 
-                    <div>
+            <div class="form-row">
 
-                        <h2>
-                            Oportunidades de Value Bet
-                        </h2>
+                <div class="form-group">
 
-                        <p>
-                            Apostas onde a probabilidade estimada é superior à probabilidade implícita da odd
-                        </p>
+                    <label for="analysis-competition">
+                        Competição
+                    </label>
 
-                    </div>
+                    <select
+                        id="analysis-competition"
+                        required
+                    >
+
+                        <option value="">
+                            Selecionar competição
+                        </option>
+
+                        <option value="PL">
+                            Premier League
+                        </option>
+
+                        <option value="PD">
+                            La Liga
+                        </option>
+
+                        <option value="BL1">
+                            Bundesliga
+                        </option>
+
+                        <option value="SA">
+                            Serie A
+                        </option>
+
+                        <option value="FL1">
+                            Ligue 1
+                        </option>
+
+                        <option value="PPL">
+                            Liga Portugal
+                        </option>
+
+                    </select>
 
                 </div>
 
 
-                <div class="bets-table-wrapper">
+                <div class="form-group">
 
-                    <table class="bets-table">
+                    <label for="analysis-date">
+                        Data do jogo
+                    </label>
 
-                        <thead>
+                    <input
+                        id="analysis-date"
+                        type="date"
+                        required
+                    >
 
-                            <tr>
+                </div>
 
-                                <th>
-                                    Jogo
-                                </th>
-
-                                <th>
-                                    Mercado
-                                </th>
-
-                                <th>
-                                    Seleção
-                                </th>
-
-                                <th>
-                                    Odd
-                                </th>
-
-                                <th>
-                                    Probabilidade
-                                </th>
-
-                                <th>
-                                    Prob. implícita
-                                </th>
-
-                                <th>
-                                    Edge
-                                </th>
-
-                                <th>
-                                    EV
-                                </th>
-
-                                <th>
-                                    Stake
-                                </th>
-
-                                <th>
-                                    Estado
-                                </th>
-
-<th>
-                                    Ação
-                                </th>
-
-                            </tr>
-
-                        </thead>
+            </div>
 
 
-                        <tbody
-                            id="value-bets-table-body"
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="analysis-home-team">
+                        Equipa da casa
+                    </label>
+
+                    <select
+                        id="analysis-home-team"
+                        required
+                        disabled
+                    >
+
+                        <option value="">
+                            Selecionar equipa da casa
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="analysis-away-team">
+                        Equipa visitante
+                    </label>
+
+                    <select
+                        id="analysis-away-team"
+                        required
+                        disabled
+                    >
+
+                        <option value="">
+                            Selecionar equipa visitante
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+
+    <!-- =========================
+         FORMA RECENTE
+    ========================== -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
+
+                <h2>
+                    📈 Forma Recente
+                </h2>
+
+                <p>
+                    Resultados e desempenho recente das duas equipas
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+
+            <!-- CASA -->
+
+            <div>
+
+                <h3>
+                    🏠 Equipa da Casa
+                </h3>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="analysis-home-last5-wins">
+                            Últimos 5 — Vitórias
+                        </label>
+
+                        <input
+                            id="analysis-home-last5-wins"
+                            type="number"
+                            min="0"
+                            max="5"
+                            step="1"
+                            placeholder="3"
                         >
-                        </tbody>
 
-                    </table>
+                    </div>
 
 
-                    <div
-                        id="value-bets-empty-state"
-                        class="empty-state"
-                    >
+                    <div class="form-group">
 
-                        <span>
-                            🎯
-                        </span>
+                        <label for="analysis-home-last5-draws">
+                            Empates
+                        </label>
 
-                        <strong>
-                            Ainda não existem Value Bets
-                        </strong>
+                        <input
+                            id="analysis-home-last5-draws"
+                            type="number"
+                            min="0"
+                            max="5"
+                            step="1"
+                            placeholder="1"
+                        >
 
-                        <p>
-                            Introduz uma probabilidade estimada superior à probabilidade implícita da odd para encontrar valor.
-                        </p>
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-home-last5-losses">
+                            Derrotas
+                        </label>
+
+                        <input
+                            id="analysis-home-last5-losses"
+                            type="number"
+                            min="0"
+                            max="5"
+                            step="1"
+                            placeholder="1"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="analysis-home-last5-gf">
+                            Golos marcados
+                        </label>
+
+                        <input
+                            id="analysis-home-last5-gf"
+                            type="number"
+                            min="0"
+                            step="1"
+                            placeholder="8"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-home-last5-ga">
+                            Golos sofridos
+                        </label>
+
+                        <input
+                            id="analysis-home-last5-ga"
+                            type="number"
+                            min="0"
+                            step="1"
+                            placeholder="4"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="analysis-home-last10-wins">
+                            Últimos 10 — Vitórias
+                        </label>
+
+                        <input
+                            id="analysis-home-last10-wins"
+                            type="number"
+                            min="0"
+                            max="10"
+                            step="1"
+                            placeholder="6"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-home-last10-draws">
+                            Empates
+                        </label>
+
+                        <input
+                            id="analysis-home-last10-draws"
+                            type="number"
+                            min="0"
+                            max="10"
+                            step="1"
+                            placeholder="2"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-home-last10-losses">
+                            Derrotas
+                        </label>
+
+                        <input
+                            id="analysis-home-last10-losses"
+                            type="number"
+                            min="0"
+                            max="10"
+                            step="1"
+                            placeholder="2"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="analysis-home-last10-gf">
+                            Golos marcados
+                        </label>
+
+                        <input
+                            id="analysis-home-last10-gf"
+                            type="number"
+                            min="0"
+                            step="1"
+                            placeholder="16"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-home-last10-ga">
+                            Golos sofridos
+                        </label>
+
+                        <input
+                            id="analysis-home-last10-ga"
+                            type="number"
+                            min="0"
+                            step="1"
+                            placeholder="9"
+                        >
 
                     </div>
 
@@ -781,144 +784,1840 @@
 
             </div>
 
-        </section>
 
 
-        <!-- =========================
-             APOSTAS
-        ========================== -->
+            <!-- FORA -->
 
-        <section
-            class="page"
-            id="bets-page"
+            <div>
+
+                <h3>
+                    ✈️ Equipa Visitante
+                </h3>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="analysis-away-last5-wins">
+                            Últimos 5 — Vitórias
+                        </label>
+
+                        <input
+                            id="analysis-away-last5-wins"
+                            type="number"
+                            min="0"
+                            max="5"
+                            step="1"
+                            placeholder="2"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-away-last5-draws">
+                            Empates
+                        </label>
+
+                        <input
+                            id="analysis-away-last5-draws"
+                            type="number"
+                            min="0"
+                            max="5"
+                            step="1"
+                            placeholder="1"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-away-last5-losses">
+                            Derrotas
+                        </label>
+
+                        <input
+                            id="analysis-away-last5-losses"
+                            type="number"
+                            min="0"
+                            max="5"
+                            step="1"
+                            placeholder="2"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="analysis-away-last5-gf">
+                            Golos marcados
+                        </label>
+
+                        <input
+                            id="analysis-away-last5-gf"
+                            type="number"
+                            min="0"
+                            step="1"
+                            placeholder="7"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-away-last5-ga">
+                            Golos sofridos
+                        </label>
+
+                        <input
+                            id="analysis-away-last5-ga"
+                            type="number"
+                            min="0"
+                            step="1"
+                            placeholder="8"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="analysis-away-last10-wins">
+                            Últimos 10 — Vitórias
+                        </label>
+
+                        <input
+                            id="analysis-away-last10-wins"
+                            type="number"
+                            min="0"
+                            max="10"
+                            step="1"
+                            placeholder="4"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-away-last10-draws">
+                            Empates
+                        </label>
+
+                        <input
+                            id="analysis-away-last10-draws"
+                            type="number"
+                            min="0"
+                            max="10"
+                            step="1"
+                            placeholder="2"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-away-last10-losses">
+                            Derrotas
+                        </label>
+
+                        <input
+                            id="analysis-away-last10-losses"
+                            type="number"
+                            min="0"
+                            max="10"
+                            step="1"
+                            placeholder="4"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="analysis-away-last10-gf">
+                            Golos marcados
+                        </label>
+
+                        <input
+                            id="analysis-away-last10-gf"
+                            type="number"
+                            min="0"
+                            step="1"
+                            placeholder="13"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-away-last10-ga">
+                            Golos sofridos
+                        </label>
+
+                        <input
+                            id="analysis-away-last10-ga"
+                            type="number"
+                            min="0"
+                            step="1"
+                            placeholder="14"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         CASA / FORA
+    ========================== -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
+
+                <h2>
+                    🏠✈️ Desempenho Casa / Fora
+                </h2>
+
+                <p>
+                    Estatísticas específicas para jogos em casa e fora
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+
+            <div>
+
+                <h3>
+                    🏠 Casa — Últimos 10 em casa
+                </h3>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="analysis-home-home-gf">
+                            Golos marcados / jogo
+                        </label>
+
+                        <input
+                            id="analysis-home-home-gf"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            placeholder="1.80"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-home-home-ga">
+                            Golos sofridos / jogo
+                        </label>
+
+                        <input
+                            id="analysis-home-home-ga"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            placeholder="1.00"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="analysis-home-home-xg">
+                            xG / jogo
+                        </label>
+
+                        <input
+                            id="analysis-home-home-xg"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            placeholder="1.75"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-home-home-xga">
+                            xGA / jogo
+                        </label>
+
+                        <input
+                            id="analysis-home-home-xga"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            placeholder="1.05"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>
+                    ✈️ Fora — Últimos 10 fora
+                </h3>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="analysis-away-away-gf">
+                            Golos marcados / jogo
+                        </label>
+
+                        <input
+                            id="analysis-away-away-gf"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            placeholder="1.40"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-away-away-ga">
+                            Golos sofridos / jogo
+                        </label>
+
+                        <input
+                            id="analysis-away-away-ga"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            placeholder="1.30"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="analysis-away-away-xg">
+                            xG / jogo
+                        </label>
+
+                        <input
+                            id="analysis-away-away-xg"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            placeholder="1.45"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-away-away-xga">
+                            xGA / jogo
+                        </label>
+
+                        <input
+                            id="analysis-away-away-xga"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            placeholder="1.35"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         BTTS / OVER UNDER
+    ========================== -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
+
+                <h2>
+                    🎯 BTTS / Over-Under
+                </h2>
+
+                <p>
+                    Frequência dos principais mercados nas últimas partidas
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+
+            <div>
+
+                <h3>
+                    🏠 Equipa da Casa
+                </h3>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="analysis-home-btts">
+                            BTTS %
+                        </label>
+
+                        <div class="input-money">
+
+                            <input
+                                id="analysis-home-btts"
+                                type="number"
+                                min="0"
+                                max="100"
+                                step="0.1"
+                                placeholder="60"
+                            >
+
+                            <span>%</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-home-over15">
+                            Over 1.5 %
+                        </label>
+
+                        <div class="input-money">
+
+                            <input
+                                id="analysis-home-over15"
+                                type="number"
+                                min="0"
+                                max="100"
+                                step="0.1"
+                                placeholder="80"
+                            >
+
+                            <span>%</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-home-over25">
+                            Over 2.5 %
+                        </label>
+
+                        <div class="input-money">
+
+                            <input
+                                id="analysis-home-over25"
+                                type="number"
+                                min="0"
+                                max="100"
+                                step="0.1"
+                                placeholder="60"
+                            >
+
+                            <span>%</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-home-over35">
+                            Over 3.5 %
+                        </label>
+
+                        <div class="input-money">
+
+                            <input
+                                id="analysis-home-over35"
+                                type="number"
+                                min="0"
+                                max="100"
+                                step="0.1"
+                                placeholder="35"
+                            >
+
+                            <span>%</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>
+                    ✈️ Equipa Visitante
+                </h3>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="analysis-away-btts">
+                            BTTS %
+                        </label>
+
+                        <div class="input-money">
+
+                            <input
+                                id="analysis-away-btts"
+                                type="number"
+                                min="0"
+                                max="100"
+                                step="0.1"
+                                placeholder="55"
+                            >
+
+                            <span>%</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-away-over15">
+                            Over 1.5 %
+                        </label>
+
+                        <div class="input-money">
+
+                            <input
+                                id="analysis-away-over15"
+                                type="number"
+                                min="0"
+                                max="100"
+                                step="0.1"
+                                placeholder="75"
+                            >
+
+                            <span>%</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-away-over25">
+                            Over 2.5 %
+                        </label>
+
+                        <div class="input-money">
+
+                            <input
+                                id="analysis-away-over25"
+                                type="number"
+                                min="0"
+                                max="100"
+                                step="0.1"
+                                placeholder="55"
+                            >
+
+                            <span>%</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="analysis-away-over35">
+                            Over 3.5 %
+                        </label>
+
+                        <div class="input-money">
+
+                            <input
+                                id="analysis-away-over35"
+                                type="number"
+                                min="0"
+                                max="100"
+                                step="0.1"
+                                placeholder="30"
+                            >
+
+                            <span>%</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         LESÕES / SUSPENSÕES
+    ========================== -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
+
+                <h2>
+                    🚑 Contexto do Jogo
+                </h2>
+
+                <p>
+                    Informação adicional que possa influenciar a análise
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="analysis-home-absences">
+                    Ausências importantes — Casa
+                </label>
+
+                <textarea
+                    id="analysis-home-absences"
+                    rows="4"
+                    placeholder="Ex.: Principal avançado lesionado, médio suspenso..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="analysis-away-absences">
+                    Ausências importantes — Fora
+                </label>
+
+                <textarea
+                    id="analysis-away-absences"
+                    rows="4"
+                    placeholder="Ex.: Defesa titular lesionado..."
+                ></textarea>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="analysis-notes">
+                Observações
+            </label>
+
+            <textarea
+                id="analysis-notes"
+                rows="4"
+                placeholder="Contexto relevante do jogo..."
+            ></textarea>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         ODDS
+    ========================== -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
+
+                <h2>
+                    💰 Odds do Mercado
+                </h2>
+
+                <p>
+                    Introduz as odds disponíveis no momento da análise
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- 1X2 -->
+
+        <h3>
+            1X2
+        </h3>
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="analysis-odd-home">
+                    Casa
+                </label>
+
+                <input
+                    id="analysis-odd-home"
+                    type="number"
+                    min="1.01"
+                    step="0.01"
+                    placeholder="2.10"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="analysis-odd-draw">
+                    Empate
+                </label>
+
+                <input
+                    id="analysis-odd-draw"
+                    type="number"
+                    min="1.01"
+                    step="0.01"
+                    placeholder="3.40"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="analysis-odd-away">
+                    Fora
+                </label>
+
+                <input
+                    id="analysis-odd-away"
+                    type="number"
+                    min="1.01"
+                    step="0.01"
+                    placeholder="3.50"
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- DUPLA CHANCE -->
+
+        <h3>
+            Dupla Chance
+        </h3>
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="analysis-odd-1x">
+                    1X
+                </label>
+
+                <input
+                    id="analysis-odd-1x"
+                    type="number"
+                    min="1.01"
+                    step="0.01"
+                    placeholder="1.30"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="analysis-odd-x2">
+                    X2
+                </label>
+
+                <input
+                    id="analysis-odd-x2"
+                    type="number"
+                    min="1.01"
+                    step="0.01"
+                    placeholder="1.70"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="analysis-odd-12">
+                    12
+                </label>
+
+                <input
+                    id="analysis-odd-12"
+                    type="number"
+                    min="1.01"
+                    step="0.01"
+                    placeholder="1.35"
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- OVER UNDER -->
+
+        <h3>
+            Over / Under
+        </h3>
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="analysis-odd-over15">
+                    Over 1.5
+                </label>
+
+                <input
+                    id="analysis-odd-over15"
+                    type="number"
+                    min="1.01"
+                    step="0.01"
+                    placeholder="1.30"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="analysis-odd-under15">
+                    Under 1.5
+                </label>
+
+                <input
+                    id="analysis-odd-under15"
+                    type="number"
+                    min="1.01"
+                    step="0.01"
+                    placeholder="3.20"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="analysis-odd-over25">
+                    Over 2.5
+                </label>
+
+                <input
+                    id="analysis-odd-over25"
+                    type="number"
+                    min="1.01"
+                    step="0.01"
+                    placeholder="1.85"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="analysis-odd-under25">
+                    Under 2.5
+                </label>
+
+                <input
+                    id="analysis-odd-under25"
+                    type="number"
+                    min="1.01"
+                    step="0.01"
+                    placeholder="1.90"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="analysis-odd-over35">
+                    Over 3.5
+                </label>
+
+                <input
+                    id="analysis-odd-over35"
+                    type="number"
+                    min="1.01"
+                    step="0.01"
+                    placeholder="2.60"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="analysis-odd-under35">
+                    Under 3.5
+                </label>
+
+                <input
+                    id="analysis-odd-under35"
+                    type="number"
+                    min="1.01"
+                    step="0.01"
+                    placeholder="1.45"
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- BTTS -->
+
+        <h3>
+            Ambas Marcam
+        </h3>
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="analysis-odd-btts-yes">
+                    BTTS — Sim
+                </label>
+
+                <input
+                    id="analysis-odd-btts-yes"
+                    type="number"
+                    min="1.01"
+                    step="0.01"
+                    placeholder="1.75"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="analysis-odd-btts-no">
+                    BTTS — Não
+                </label>
+
+                <input
+                    id="analysis-odd-btts-no"
+                    type="number"
+                    min="1.01"
+                    step="0.01"
+                    placeholder="2.00"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         RESULTADO DO MODELO
+    ========================== -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
+
+                <h2>
+                    🧠 Análise do Modelo
+                </h2>
+
+                <p>
+                    Probabilidades calculadas pelo nosso modelo estatístico
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div id="analysis-model-placeholder">
+
+            <div class="empty-state">
+
+                <span>
+                    🧠
+                </span>
+
+                <strong>
+                    Análise ainda não calculada
+                </strong>
+
+                <p>
+                    Preenche os dados do jogo e calcula a análise para veres as probabilidades, odds justas e valor esperado.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- 1X2 -->
+
+        <div
+            id="analysis-result-1x2"
             style="display: none;"
         >
 
-            <header class="topbar">
-
-                <div>
-
-                    <h1>
-                        Apostas
-                    </h1>
-
-                    <p>
-                        Registo e gestão das tuas apostas
-                    </p>
-
-                </div>
+            <h3>
+                1X2
+            </h3>
 
 
-                <button
-                    id="new-bet-button"
-                    class="primary-button"
-                >
-                    + Nova aposta
-                </button>
+            <div class="bets-table-wrapper">
 
-            </header>
+                <table class="bets-table">
 
+                    <thead>
 
-            <div class="panel">
+                        <tr>
 
-                <div class="panel-header">
+                            <th>
+                                Mercado
+                            </th>
 
-                    <div>
+                            <th>
+                                Probabilidade
+                            </th>
 
-                        <h2>
-                            Histórico de apostas
-                        </h2>
+                            <th>
+                                Odd justa
+                            </th>
 
-                        <p>
-                            Todas as apostas registadas
-                        </p>
+                            <th>
+                                Odd mercado
+                            </th>
 
-                    </div>
+                            <th>
+                                Prob. implícita
+                            </th>
 
-                </div>
+                            <th>
+                                EV
+                            </th>
 
+                        </tr>
 
-                <div class="bets-table-wrapper">
-
-                    <table class="bets-table">
-
-                        <thead>
-
-                            <tr>
-
-                                <th>
-                                    Data
-                                </th>
-
-                                <th>
-                                    Jogo
-                                </th>
-
-                                <th>
-                                    Mercado
-                                </th>
-
-                                <th>
-                                    Seleção
-                                </th>
-
-                                <th>
-                                    Odd
-                                </th>
-
-                                <th>
-                                    Stake
-                                </th>
-
-                                <th>
-                                    Estado
-                                </th>
-
-                                <th>
-                                    Lucro
-                                </th>
-
-                                <th>
-                                    Ações
-                                </th>
-
-                            </tr>
-
-                        </thead>
+                    </thead>
 
 
-                        <tbody id="bets-table-body">
+                    <tbody>
 
-                        </tbody>
+                        <tr data-analysis-market="home">
 
-                    </table>
+                            <td>
+                                Casa
+                            </td>
+
+                            <td data-analysis-probability-home>
+                                -
+                            </td>
+
+                            <td data-analysis-fair-home>
+                                -
+                            </td>
+
+                            <td data-analysis-market-odd-home>
+                                -
+                            </td>
+
+                            <td data-analysis-implied-home>
+                                -
+                            </td>
+
+                            <td data-analysis-ev-home>
+                                -
+                            </td>
+
+                        </tr>
 
 
-                    <div
-                        id="bets-empty-state"
-                        class="empty-state"
-                    >
+                        <tr data-analysis-market="draw">
 
-                        <span>
-                            💰
-                        </span>
+                            <td>
+                                Empate
+                            </td>
 
-                        <strong>
-                            Ainda não existem apostas
-                        </strong>
+                            <td data-analysis-probability-draw>
+                                -
+                            </td>
 
-                        <p>
-                            Clica em "+ Nova aposta" para
-                            registar a primeira.
-                        </p>
+                            <td data-analysis-fair-draw>
+                                -
+                            </td>
 
-                    </div>
+                            <td data-analysis-market-odd-draw>
+                                -
+                            </td>
 
-                </div>
+                            <td data-analysis-implied-draw>
+                                -
+                            </td>
+
+                            <td data-analysis-ev-draw>
+                                -
+                            </td>
+
+                        </tr>
+
+
+                        <tr data-analysis-market="away">
+
+                            <td>
+                                Fora
+                            </td>
+
+                            <td data-analysis-probability-away>
+                                -
+                            </td>
+
+                            <td data-analysis-fair-away>
+                                -
+                            </td>
+
+                            <td data-analysis-market-odd-away>
+                                -
+                            </td>
+
+                            <td data-analysis-implied-away>
+                                -
+                            </td>
+
+                            <td data-analysis-ev-away>
+                                -
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
 
             </div>
 
-        </section>
+        </div>
+
+
+
+        <!-- DUPLA CHANCE -->
+
+        <div
+            id="analysis-result-double-chance"
+            style="display: none;"
+        >
+
+            <h3>
+                Dupla Chance
+            </h3>
+
+
+            <div class="bets-table-wrapper">
+
+                <table class="bets-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Mercado
+                            </th>
+
+                            <th>
+                                Probabilidade
+                            </th>
+
+                            <th>
+                                Odd justa
+                            </th>
+
+                            <th>
+                                Odd mercado
+                            </th>
+
+                            <th>
+                                Prob. implícita
+                            </th>
+
+                            <th>
+                                EV
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                1X
+                            </td>
+
+                            <td data-analysis-probability-1x>
+                                -
+                            </td>
+
+                            <td data-analysis-fair-1x>
+                                -
+                            </td>
+
+                            <td data-analysis-market-odd-1x>
+                                -
+                            </td>
+
+                            <td data-analysis-implied-1x>
+                                -
+                            </td>
+
+                            <td data-analysis-ev-1x>
+                                -
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                X2
+                            </td>
+
+                            <td data-analysis-probability-x2>
+                                -
+                            </td>
+
+                            <td data-analysis-fair-x2>
+                                -
+                            </td>
+
+                            <td data-analysis-market-odd-x2>
+                                -
+                            </td>
+
+                            <td data-analysis-implied-x2>
+                                -
+                            </td>
+
+                            <td data-analysis-ev-x2>
+                                -
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                12
+                            </td>
+
+                            <td data-analysis-probability-12>
+                                -
+                            </td>
+
+                            <td data-analysis-fair-12>
+                                -
+                            </td>
+
+                            <td data-analysis-market-odd-12>
+                                -
+                            </td>
+
+                            <td data-analysis-implied-12>
+                                -
+                            </td>
+
+                            <td data-analysis-ev-12>
+                                -
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- OVER UNDER -->
+
+        <div
+            id="analysis-result-over-under"
+            style="display: none;"
+        >
+
+            <h3>
+                Over / Under
+            </h3>
+
+
+            <div class="bets-table-wrapper">
+
+                <table class="bets-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Mercado
+                            </th>
+
+                            <th>
+                                Probabilidade
+                            </th>
+
+                            <th>
+                                Odd justa
+                            </th>
+
+                            <th>
+                                Odd mercado
+                            </th>
+
+                            <th>
+                                Prob. implícita
+                            </th>
+
+                            <th>
+                                EV
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                Over 1.5
+                            </td>
+
+                            <td data-analysis-probability-over15>
+                                -
+                            </td>
+
+                            <td data-analysis-fair-over15>
+                                -
+                            </td>
+
+                            <td data-analysis-market-odd-over15>
+                                -
+                            </td>
+
+                            <td data-analysis-implied-over15>
+                                -
+                            </td>
+
+                            <td data-analysis-ev-over15>
+                                -
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Under 1.5
+                            </td>
+
+                            <td data-analysis-probability-under15>
+                                -
+                            </td>
+
+                            <td data-analysis-fair-under15>
+                                -
+                            </td>
+
+                            <td data-analysis-market-odd-under15>
+                                -
+                            </td>
+
+                            <td data-analysis-implied-under15>
+                                -
+                            </td>
+
+                            <td data-analysis-ev-under15>
+                                -
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Over 2.5
+                            </td>
+
+                            <td data-analysis-probability-over25>
+                                -
+                            </td>
+
+                            <td data-analysis-fair-over25>
+                                -
+                            </td>
+
+                            <td data-analysis-market-odd-over25>
+                                -
+                            </td>
+
+                            <td data-analysis-implied-over25>
+                                -
+                            </td>
+
+                            <td data-analysis-ev-over25>
+                                -
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Under 2.5
+                            </td>
+
+                            <td data-analysis-probability-under25>
+                                -
+                            </td>
+
+                            <td data-analysis-fair-under25>
+                                -
+                            </td>
+
+                            <td data-analysis-market-odd-under25>
+                                -
+                            </td>
+
+                            <td data-analysis-implied-under25>
+                                -
+                            </td>
+
+                            <td data-analysis-ev-under25>
+                                -
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Over 3.5
+                            </td>
+
+                            <td data-analysis-probability-over35>
+                                -
+                            </td>
+
+                            <td data-analysis-fair-over35>
+                                -
+                            </td>
+
+                            <td data-analysis-market-odd-over35>
+                                -
+                            </td>
+
+                            <td data-analysis-implied-over35>
+                                -
+                            </td>
+
+                            <td data-analysis-ev-over35>
+                                -
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Under 3.5
+                            </td>
+
+                            <td data-analysis-probability-under35>
+                                -
+                            </td>
+
+                            <td data-analysis-fair-under35>
+                                -
+                            </td>
+
+                            <td data-analysis-market-odd-under35>
+                                -
+                            </td>
+
+                            <td data-analysis-implied-under35>
+                                -
+                            </td>
+
+                            <td data-analysis-ev-under35>
+                                -
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- BTTS -->
+
+        <div
+            id="analysis-result-btts"
+            style="display: none;"
+        >
+
+            <h3>
+                Ambas Marcam
+            </h3>
+
+
+            <div class="bets-table-wrapper">
+
+                <table class="bets-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Mercado
+                            </th>
+
+                            <th>
+                                Probabilidade
+                            </th>
+
+                            <th>
+                                Odd justa
+                            </th>
+
+                            <th>
+                                Odd mercado
+                            </th>
+
+                            <th>
+                                Prob. implícita
+                            </th>
+
+                            <th>
+                                EV
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                BTTS — Sim
+                            </td>
+
+                            <td data-analysis-probability-btts-yes>
+                                -
+                            </td>
+
+                            <td data-analysis-fair-btts-yes>
+                                -
+                            </td>
+
+                            <td data-analysis-market-odd-btts-yes>
+                                -
+                            </td>
+
+                            <td data-analysis-implied-btts-yes>
+                                -
+                            </td>
+
+                            <td data-analysis-ev-btts-yes>
+                                -
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                BTTS — Não
+                            </td>
+
+                            <td data-analysis-probability-btts-no>
+                                -
+                            </td>
+
+                            <td data-analysis-fair-btts-no>
+                                -
+                            </td>
+
+                            <td data-analysis-market-odd-btts-no>
+                                -
+                            </td>
+
+                            <td data-analysis-implied-btts-no>
+                                -
+                            </td>
+
+                            <td data-analysis-ev-btts-no>
+                                -
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         MELHORES OPORTUNIDADES
+    ========================== -->
+
+    <div
+        class="panel"
+        id="analysis-best-opportunities"
+        style="display: none;"
+    >
+
+        <div class="panel-header">
+
+            <div>
+
+                <h2>
+                    🔥 Melhores Oportunidades
+                </h2>
+
+                <p>
+                    Mercados com maior valor esperado positivo
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div id="analysis-opportunities-list">
+
+            <div class="empty-state">
+
+                <span>
+                    🔎
+                </span>
+
+                <strong>
+                    Ainda não existem oportunidades
+                </strong>
+
+                <p>
+                    Calcula a análise para identificar possíveis oportunidades de valor.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         AÇÕES
+    ========================== -->
+
+    <div class="panel">
+
+        <div class="modal-actions">
+
+            <button
+                type="button"
+                id="calculate-match-analysis"
+                class="primary-button"
+            >
+                🧠 Analisar Jogo
+            </button>
+
+
+            <button
+                type="button"
+                id="save-match-analysis"
+                class="secondary-button"
+                disabled
+            >
+                💾 Guardar Análise
+            </button>
+
+
+            <button
+                type="button"
+                id="clear-match-analysis"
+                class="secondary-button"
+            >
+                Limpar
+            </button>
+
+        </div>
+
+
+        <div
+            id="match-analysis-status"
+            class="settings-message"
+        ></div>
+
+    </div>
+
+</section>
 
         <!-- =========================
      ESTATÍSTICAS
